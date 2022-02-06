@@ -1,0 +1,8 @@
+defencodig utf-8
+escape ^Zz
+
+defscrollback 1000
+ 
+startup_message off
+ 
+autodetach on
