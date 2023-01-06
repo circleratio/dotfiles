@@ -381,6 +381,19 @@
       (shell-command "explorer ."))
   (message "This OS is %s. This function works on on Windows " system-type))
 
+;; Insert current date and time into the current buffer
+(defvar current-date-time-format "%Y-%m-%d %H:%M:%S"
+  "Format of date to insert with `insert-current-date-time' func. See help of `format-time-string' for possible replacements")
+
+(defun insert-current-date-time ()
+  "insert the current date and time into current buffer.
+Uses `current-date-time-format' for the formatting the date/time."
+  (interactive)
+  (insert (format-time-string current-date-time-format (current-time)))
+  (insert "\n"))
+
+(global-set-key "\C-cd" 'insert-current-date-time)
+
 ;; exec chmod +x when a file begins with '#!'
 (add-hook 'after-save-hook
           'executable-make-buffer-file-executable-if-script-p)
