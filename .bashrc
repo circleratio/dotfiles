@@ -14,7 +14,6 @@ function hi() {
         sh ~/bin/update-workspace
     fi
     cd ~/work/ws
-    echo "Hi!"
 }
 
 function bye() {
@@ -26,6 +25,7 @@ function bye() {
 
 function c() {
     BOOKMARK="~/.dir_bookmark"
+    BOOKMARK=`eval echo "$BOOKMARK"`
     if [ -z $1 ] ; then
         cat "$BOOKMARK"
     else
