@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 # qrencode.py
 #
 # Copyright (C) 2023  Teruyoshi FUJIWARA <tf@dsl.gr.jp>
