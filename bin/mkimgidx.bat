@@ -1,1 +1,1 @@
-python c:/Users/Fujiwara/bin/mkimgidx.py
+python ~/bin/mkimgidx.py
