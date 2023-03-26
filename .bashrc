@@ -11,6 +11,8 @@ stty stop undef
 alias ls='ls -F --color=auto --show-control-chars'
 alias md=mkdir
 
+PATH=$PATH:$HOME/bin
+
 function mcd() {
     mkdir "$1"
     cd "$1"
