@@ -1,3 +1,9 @@
+# Don't do anything, when not running interactively. 
+case $- in
+    *i*) ;;
+      *) return;;
+esac
+
 export HISTCONTROL=ignoredups:ignorespace:erasedups
 
 stty stop undef
