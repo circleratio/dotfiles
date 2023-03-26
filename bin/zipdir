@@ -1,0 +1,9 @@
+#!/bin/sh
+
+for i in $* ; do
+    if [ -d "$i" ]; then
+        ls "$i"/* | zip -@ "$i".zip
+    else
+        echo "$i" is not a directory. Skipped.
+    fi
+done
