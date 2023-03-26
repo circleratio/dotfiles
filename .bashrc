@@ -43,3 +43,7 @@ function c() {
         fi
     fi
 }
+
+if [ -f ~/.bashrc-personal ]; then
+    source ~/.bashrc-personal
+fi
