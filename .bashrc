@@ -8,6 +8,7 @@ export HISTCONTROL=ignoredups:ignorespace:erasedups
 
 stty stop undef
 
+alias ls='ls -F --color=auto --show-control-chars'
 alias md=mkdir
 
 function mcd() {
