@@ -50,6 +50,19 @@ function c() {
     fi
 }
 
+# prompt                                                                                                                        
+case "$TERM" in
+    xterm|xterm-color|*-256color) color_prompt=yes;;
+esac
+
+if [ "$color_prompt" = yes ]; then
+    PS1='\[\e[01;32m\]\u@\h\[\e[00m\]:\[\e[01;34m\]\w \$\[\e[00m\] '
+else
+    PS1='\u@\h:\w\$ '
+fi
+
+unset color_prompt
+
 if [ -f ~/.bashrc-personal ]; then
     source ~/.bashrc-personal
 fi
