@@ -1,0 +1,25 @@
+#!/usr/bin/bash
+
+WORKDIR=/tmp/qr.$RANDOM
+if [ -e "$WORKDIR" ]; then
+    The working directory already exists. Aborted.
+fi
+
+mkdir "$WORKDIR"
+
+num=0
+for f in "${@}"; do
+    if [ -f "$f" ]; then
+        OUTFILE="$WORKDIR/qr.$num.png"
+        echo Converting "$f" "$OUTFILE" ...
+        cat "$f"  | qrencode -t PNG -o "$OUTFILE"
+        RESULT[$num]="$OUTFILE"
+        num=`expr $num + 1`
+    else
+        echo $f does not exist.
+    fi
+done
+
+feh ${RESULT[@]}
+
+rm -r "$WORKDIR"
