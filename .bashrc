@@ -55,7 +55,7 @@ function c() {
 
 # prompt                                                                                                                        
 case "$TERM" in
-    xterm|xterm-color|*-256color) color_prompt=yes;;
+    xterm|xterm-color|*-256color|screen) color_prompt=yes;;
 esac
 
 if [ "$color_prompt" = yes ]; then
