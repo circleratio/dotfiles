@@ -17,15 +17,21 @@ function install_file_only_if_no_exist () {
     fi
 }
 
+echo Making directories...
+dirs=(bin .emacs.d .emacs.d/site-lisp .emacs.d/scripts)
+for d in "${dirs[@]}"; do
+    install -Cd ~/"$d"
+done
+
 echo Install files...
 
-files=(.bash_profile  .bashrc .screenrc bin/*)
+files=(.bash_profile .bashrc .screenrc bin/* .emacs.d/site-lisp/* .emacs.d/scripts/*)
 
 for f in "${files[@]}"; do
     install_file "$f" ~/"$f"
 done
 
-files=(.dir_bookmark)
+files=(.dir_bookmark .emacs.d/init.el)
 for f in "${files[@]}"; do
     install_file_only_if_no_exist "$f" ~/"$f"
 done
