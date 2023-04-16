@@ -82,7 +82,7 @@
     (set-buffer-file-coding-system 'utf-8)
     (set-default-coding-systems 'utf-8)))
 
-(leaf ime
+(leaf ime-windows
   :config
   (leaf tr-ime
     :if (eq system-type 'windows-nt)
@@ -111,6 +111,14 @@
     :bind (("C-o" . toggle-input-method)
            ("<f5>" . on-input-method)
            ("<f6>" . off-input-method))))
+
+(leaf ime-linux
+  :if (eq system-type 'gnu/linux)
+  :config
+  (leaf mozc
+    :ensure t
+    :bind (("C-o" . toggle-input-method)))
+  (setq default-input-method "japanese-mozc"))
 
 ;; behaviors
 (leaf consult
@@ -372,7 +380,7 @@
                                                            (nthcdr ,args-pos args)))
                                              (apply orig-fun args))
                                    '((depth . 99))))))
-
+      
 ;; [Windows] launch explorer
 (defun explorer-invoke()
   "Invoke Explorer on Windows systems"
