@@ -1,6 +1,13 @@
 #!/usr/bin/python
 
 import glob
+import re
+
+def atoi(text):
+    return int(text) if text.isdigit() else text
+
+def natural_keys(text):
+    return [ atoi(c) for c in re.split(r'(\d+)', text) ]
 
 header1 = '''<!doctype html>
 <html>
@@ -38,6 +45,8 @@ footer = '''    </ul>
 '''
 
 files = glob.glob('*.jpg')
+files = sorted(files)
+files = sorted(files, key=natural_keys)
 
 print(header1 + str(len(files)) + header2)
 for f in files:
