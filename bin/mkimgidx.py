@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 
 import glob
 import re
@@ -44,7 +44,12 @@ footer = '''    </ul>
 </html>
 '''
 
-files = glob.glob('*.jpg')
+files = []
+types = ('jpg', 'png')
+
+for t in types:
+    files += glob.glob('*.' + t)
+    
 files = sorted(files)
 files = sorted(files, key=natural_keys)
 
