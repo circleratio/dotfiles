@@ -8,8 +8,14 @@ export HISTCONTROL=ignoredups:ignorespace:erasedups
 
 stty stop undef
 
+alias e=emacs
 alias ls='ls -F --color=auto --show-control-chars'
 alias md=mkdir
+alias v=vi
+alias wget='wget -c'
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
 
 PATH=$PATH:$HOME/bin
 
