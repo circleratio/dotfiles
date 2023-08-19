@@ -9,18 +9,31 @@ export HISTCONTROL=ignoredups:ignorespace:erasedups
 stty stop undef
 
 alias e=emacs
+alias g=git
+alias ga='git add'
+alias gc='git commit -m'
+alias gd='git diff --name-only'
+alias gl='git log --oneline --decorate --graph --branches --tags --remotes --all'
+alias gp='git push'
+alias gps='git push'
+alias gpl='git pull'
+alias gs='git status'
+alias h=history
+alias ll='clear && ls -l'
 alias ls='ls -F --color=auto --show-control-chars'
 alias md=mkdir
+alias md2x='python3 ~/tmp/md2x/md2x.py'
+alias python=python3
 alias v=vi
 alias wget='wget -c'
 alias ..='cd ..'
-alias ...='cd ../..'
-alias ....='cd ../../..'
+alias ..2='cd ../..'
+alias ..3='cd ../../..'
 if [ `uname -o` = 'Msys' ]; then
-   alias exp='explorer .'
+    alias x='explorer .'
 fi
 
-PATH=$PATH:/opt/bin:$HOME/bin
+PATH=$PATH:$HOME/bin
 
 function mcd() {
     mkdir "$1"
