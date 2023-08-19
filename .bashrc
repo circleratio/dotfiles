@@ -16,6 +16,9 @@ alias wget='wget -c'
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
+if [ `uname -o` = 'Msys' ]; then
+   alias exp='explorer .'
+fi
 
 PATH=$PATH:/opt/bin:$HOME/bin
 
