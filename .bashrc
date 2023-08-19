@@ -18,11 +18,13 @@ alias gp='git push'
 alias gps='git push'
 alias gpl='git pull'
 alias gs='git status'
+alias grep='grep --color=auto'
 alias h=history
 alias ll='clear && ls -l'
 alias ls='ls -F --color=auto --show-control-chars'
 alias md=mkdir
 alias md2x='python3 ~/tmp/md2x/md2x.py'
+alias myip='curl ipinfo.io/ip'
 alias python=python3
 alias v=vi
 alias wget='wget -c'
