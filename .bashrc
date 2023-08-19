@@ -17,7 +17,7 @@ alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
 
-PATH=$PATH:$HOME/bin
+PATH=$PATH:/opt/bin:$HOME/bin
 
 function mcd() {
     mkdir "$1"
