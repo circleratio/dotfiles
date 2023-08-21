@@ -37,7 +37,11 @@ if [ `uname -o` = 'Msys' ]; then
     alias x='explorer .'
 fi
 
-PATH=$PATH:$HOME/bin
+if [ -d /opt/bin ]; then
+    PATH=$PATH:/opt/bin/$HOME/bin
+else
+    PATH=$PATH:$HOME/bin
+fi
 
 function mcd() {
     mkdir "$1"
