@@ -8,7 +8,9 @@ export HISTCONTROL=ignoredups:ignorespace:erasedups
 
 stty stop undef
 
+alias d='vi /mnt/sd/02\ 日記.txt'
 alias e=emacs
+alias fbterm='LANG=ja_JP.UTF-8 fbterm -- uim-fep'
 alias g=git
 alias ga='git add'
 alias gc='git commit -m'
@@ -22,6 +24,7 @@ alias grep='grep --color=auto'
 alias h=history
 alias ll='clear && ls -l'
 alias ls='ls -F --color=auto --show-control-chars'
+alias m='vi ~/doc/DADC/00\ note.txt'
 alias md=mkdir
 alias myip='curl ipinfo.io/ip'
 alias v=vi
@@ -38,7 +41,7 @@ if [ `uname -o` = 'Msys' ]; then
 fi
 
 if [ -d /opt/bin ]; then
-    PATH=$PATH:/opt/bin/$HOME/bin
+    PATH=$PATH:/opt/bin/:$HOME/bin
 else
     PATH=$PATH:$HOME/bin
 fi
@@ -56,7 +59,7 @@ function hi() {
     if [ -f ~/bin/update-workspace ]; then
         sh ~/bin/update-workspace
     fi
-    cd ~/work/ws
+    cd ~/work
 }
 
 function bye() {
