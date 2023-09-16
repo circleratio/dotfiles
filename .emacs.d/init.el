@@ -425,6 +425,12 @@ Uses `current-date-time-format' for the formatting the date/time."
       (append (list
               '(font . "UDEV Gothic JPDOC-16"))
               default-frame-alist))
+(setq initial-frame-alist
+      (append (list
+               '(width . 80)
+               '(height . 31)
+               '(top . 4)
+               '(left . 1))))
 (cd "~")
 
 ;; Local Variables:
