@@ -24,9 +24,10 @@ alias grep='grep --color=auto'
 alias h=history
 alias ll='clear && ls -l'
 alias ls='ls -F --color=auto --show-control-chars'
-alias m='vi ~/doc/DADC/00\ note.txt'
+alias m=neomutt
 alias md=mkdir
 alias myip='curl ipinfo.io/ip'
+alias n='vi ~/doc/DADC/00\ note.txt'
 alias v=vi
 alias wget='wget -c'
 alias ..='cd ..'
