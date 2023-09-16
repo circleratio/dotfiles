@@ -421,6 +421,12 @@ Uses `current-date-time-format' for the formatting the date/time."
   (if (file-exists-p personal-settings)
       (load-file personal-settings)))
 
+(setq default-frame-alist
+      (append (list
+              '(font . "UDEV Gothic JPDOC-16"))
+              default-frame-alist))
+(cd "~")
+
 ;; Local Variables:
 ;; indent-tabs-mode: nil
 ;; End:
