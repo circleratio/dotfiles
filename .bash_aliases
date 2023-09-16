@@ -1,3 +1,5 @@
+alias apt='sudo apt'
+alias b='bc -l'
 alias e=emacs
 alias fbterm='LANG=ja_JP.UTF-8 fbterm -- uim-fep'
 alias g=git
@@ -21,11 +23,11 @@ alias p='ps aux'
 alias s='[[ -v STY ]] || screen'
 alias u='cd ..'
 alias v=vi
-alias w='cd ~/work'
 alias wget='wget -c'
 alias ..='cd ..'
-alias ..2='cd ../..'
-alias ..3='cd ../../..'
+alias .2='cd ../..'
+alias .3='cd ../../..'
+alias .4='cd ../../../..'
 
 if [ `uname -o` = 'GNU/Linux' ]; then
     alias python=python3
