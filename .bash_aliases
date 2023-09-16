@@ -12,11 +12,16 @@ alias gs='git status'
 alias grep='grep --color=auto'
 alias h=history
 alias l='ls -F --color=auto --show-control-chars'
+alias la='ls -la'
 alias ll='clear && ls -l'
 alias m=neomutt
 alias md=mkdir
 alias myip='curl ipinfo.io/ip'
+alias p='ps aux'
+alias s='[[ -v STY ]] || screen'
+alias u='cd ..'
 alias v=vi
+alias w='cd ~/work'
 alias wget='wget -c'
 alias ..='cd ..'
 alias ..2='cd ../..'
