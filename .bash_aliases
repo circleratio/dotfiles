@@ -19,6 +19,7 @@ alias ll='clear && ls -l'
 alias m=neomutt
 alias md=mkdir
 alias myip='curl ipinfo.io/ip'
+alias np='git add note.txt ; git commit -m update ; git push'
 alias p='ps aux'
 alias s='[[ -v STY ]] || screen'
 alias u='cd ..'
