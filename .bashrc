@@ -8,37 +8,8 @@ export HISTCONTROL=ignoredups:ignorespace:erasedups
 
 stty stop undef
 
-alias b=battery
-alias d='vi /mnt/sd/02\ 日記.txt'
-alias e=emacs
-alias fbterm='LANG=ja_JP.UTF-8 fbterm -- uim-fep'
-alias g=git
-alias ga='git add'
-alias gc='git commit -m'
-alias gd='git diff --name-only'
-alias gl='git log --oneline --decorate --graph --branches --tags --remotes --all'
-alias gp='git push'
-alias gps='git push'
-alias gpl='git pull'
-alias gs='git status'
-alias grep='grep --color=auto'
-alias h=history
-alias ll='clear && ls -l'
-alias ls='ls -F --color=auto --show-control-chars'
-alias m='vi ~/doc/DADC/00\ note.txt'
-alias md=mkdir
-alias myip='curl ipinfo.io/ip'
-alias v=vi
-alias wget='wget -c'
-alias ..='cd ..'
-alias ..2='cd ../..'
-alias ..3='cd ../../..'
-if [ `uname -o` = 'GNU/Linux' ]; then
-    alias python=python3
-    alias md2x='python3 ~/tmp/md2x/md2x.py'
-fi
-if [ `uname -o` = 'Msys' ]; then
-    alias x='explorer .'
+if [ -f ~/.bash_aliases ]; then
+    . ~/.bash_aliases
 fi
 
 if [ -d /opt/bin ]; then
