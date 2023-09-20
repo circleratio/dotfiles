@@ -8,6 +8,7 @@ export HISTCONTROL=ignoredups:ignorespace:erasedups
 
 stty stop undef
 
+alias b=battery
 alias d='vi /mnt/sd/02\ 日記.txt'
 alias e=emacs
 alias fbterm='LANG=ja_JP.UTF-8 fbterm -- uim-fep'
