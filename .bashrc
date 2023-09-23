@@ -74,3 +74,5 @@ unset color_prompt
 if [ -f ~/.bashrc-personal ]; then
     source ~/.bashrc-personal
 fi
+
+cd ~
