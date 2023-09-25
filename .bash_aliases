@@ -42,4 +42,6 @@ fi
 if [ `whoami` = 'pomera' ]; then
     alias d='vi /mnt/sd/02\ 日記.txt'
     alias n='vi ~/doc/DADC/00\ note.txt'
+    alias won='sudo /opt/bin/wifi_switch on'
+    alias woff='sudo /opt/bin/wifi_switch off'
 fi
