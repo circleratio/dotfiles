@@ -16,13 +16,14 @@ alias h=history
 alias l='ls -F --color=auto --show-control-chars'
 alias la='ls -la'
 alias ll='clear && ls -l'
+alias ls='ls -F --color=auto --show-control-chars'
 alias m=neomutt
 alias md=mkdir
 alias myip='curl ipinfo.io/ip'
-alias np='git add note.txt ; git commit -m update ; git push'
-alias p='ps aux'
-alias random='openssl rand -base64 16'
+alias p='python'
 alias s='[[ -v STY ]] || screen'
+alias sr='[[ -v STY ]] || screen -r'
+alias sl='ls -F --color=auto --show-control-chars'
 alias u='cd ..'
 alias v=vi
 alias wget='wget -c'
@@ -38,9 +39,4 @@ fi
 
 if [ `uname -o` = 'Msys' ]; then
     alias x='explorer .'
-fi
-
-if [ `whoami` = 'pomera' ]; then
-    alias won='sudo /opt/bin/wifi_switch on'
-    alias woff='sudo /opt/bin/wifi_switch off'
 fi
