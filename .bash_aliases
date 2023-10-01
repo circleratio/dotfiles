@@ -40,3 +40,9 @@ fi
 if [ `uname -o` = 'Msys' ]; then
     alias x='explorer .'
 fi
+
+if [[ $(hostname) == 'pomera' ]]; then
+    alias won='sudo /opt/bin/wifi_switch on'
+    alias woff='sudo /opt/bin/wifi_switch off'
+    alias f='fbterm'
+fi
