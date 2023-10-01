@@ -1,7 +1,5 @@
 alias apt='sudo apt'
-alias b='bc -l'
 alias e=emacs
-alias fbterm='LANG=ja_JP.UTF-8 fbterm -- uim-fep'
 alias g=git
 alias ga='git add'
 alias gc='git commit -m'
@@ -42,7 +40,9 @@ if [ `uname -o` = 'Msys' ]; then
 fi
 
 if [[ $(hostname) == 'pomera' ]]; then
+    alias b=battery
+    alias f='LANG=ja_JP.UTF-8 fbterm -- uim-fep'
+    alias fbterm='LANG=ja_JP.UTF-8 fbterm -- uim-fep'
     alias won='sudo /opt/bin/wifi_switch on'
     alias woff='sudo /opt/bin/wifi_switch off'
-    alias f='fbterm'
 fi
