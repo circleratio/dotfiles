@@ -11,9 +11,9 @@ alias gpl='git pull'
 alias gs='git status'
 alias grep='grep --color=auto'
 alias h=history
-alias l='ls -F --color=auto --show-control-chars'
+alias l=ls
 alias la='ls -la'
-alias ll='clear && ls -l'
+alias ll='ls -l'
 alias ls='ls -F --color=auto --show-control-chars'
 alias m=neomutt
 alias md=mkdir
@@ -41,8 +41,8 @@ fi
 
 if [[ $(hostname) == 'pomera' ]]; then
     alias b=battery
-    alias f='LANG=ja_JP.UTF-8 fbterm -- uim-fep'
-    alias fbterm='LANG=ja_JP.UTF-8 fbterm -- uim-fep'
+    alias f='LANG=ja_JP.UTF-8 /usr/bin/fbterm -- uim-fep'
+    alias fbterm='LANG=ja_JP.UTF-8 /usr/bin/fbterm -- uim-fep'
     alias won='sudo /opt/bin/wifi_switch on'
     alias woff='sudo /opt/bin/wifi_switch off'
 fi
