@@ -23,7 +23,7 @@ function install_file_only_if_no_exist () {
 
 function install_dir () {
     if [[ ! -d "$2/$1" ]]; then
-        echo install -Cd "$1" "$2/$1"
+        install -Cd "$1" "$2/$1"
     else
         echo "$2/$1" already exists. Skipped.
     fi
@@ -63,6 +63,8 @@ install_file .mailcap ${HOME}
 
 echo ========== vim ==========
 make_symlink .vimrc "${SRC}" "${HOME}"
+install_dir .vim/dein "${HOME}"
+make_symlink dein.toml "${SRC}/.vim/dein" "${HOME}/.vim/dein" 
 
 echo ========== directory bookmark ==========
 install_file .dir_bookmark ${HOME}
