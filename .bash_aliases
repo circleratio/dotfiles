@@ -15,6 +15,7 @@ alias l=ls
 alias la='ls -la'
 alias ll='ls -l'
 alias ls='ls -F --color=auto --show-control-chars'
+alias more=batcat
 alias m=neomutt
 alias md=mkdir
 alias myip='curl ipinfo.io/ip'
