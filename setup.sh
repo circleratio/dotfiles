@@ -30,11 +30,13 @@ function install_dir () {
 }
 
 function make_symlink () {
-    if [[ ! -L "$2" ]]; then
-        Linking "$1" "$2"
-        ln -s "$1" "$2"
+    LINK_TO="${2%/}/$1"
+    LINK_FROM="${3%/}/$1"
+    if [[ ! -L "${LINK_FROM}" ]]; then
+        echo Linking "${LINK_TO}" and "${LINK_FROM}"
+        ln -s "${LINK_TO}" "${LINK_FROM}"
     else
-        echo "$2" already exists. Skipped.
+        echo "${LINK_FROM}" already exists. Skipped.
     fi
 }
 
@@ -43,7 +45,7 @@ SRC=$(pwd $(dirname $0))
 echo ========== bash ==========
 install_file .bash_profile ${HOME}
 install_file .bashrc ${HOME}
-make_symlink "${SRC}/.bash_aliases" "${HOME}/.bash_aliases"
+make_symlink .bash_aliases "${SRC}" "${HOME}"
 
 echo ========== screen ==========
 install_file .screenrc ${HOME}
@@ -53,11 +55,14 @@ install_dir .emacs.d ${HOME}
 
 echo ========== bin files ==========
 for f in $(ls bin/*); do
-    make_symlink "${SRC}/${f}" "${HOME}/${f}"
+    make_symlink "$f" "${SRC}" "${HOME}"
 done
 
 echo ========== mailcap ==========
 install_file .mailcap ${HOME}
+
+echo ========== vim ==========
+make_symlink .vimrc "${SRC}" "${HOME}"
 
 echo ========== directory bookmark ==========
 install_file .dir_bookmark ${HOME}
