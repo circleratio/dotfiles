@@ -1,5 +1,8 @@
 alias apt='sudo apt'
+alias b='cd -'
+# c is used for a shell function
 alias e=emacs
+# f is used for fbterm
 alias g=git
 alias ga='git add'
 alias gc='git commit -m'
@@ -11,6 +14,7 @@ alias gpl='git pull'
 alias gs='git status'
 alias grep='grep --color=auto'
 alias h=history
+alias i='curl ipinfo.io/ip'
 alias l=ls
 alias la='ls -la'
 alias ll='ls -l'
@@ -18,7 +22,6 @@ alias ls='ls -F --color=auto --show-control-chars'
 alias more=batcat
 alias m=neomutt
 alias md=mkdir
-alias myip='curl ipinfo.io/ip'
 alias p='python'
 alias s='[[ -v STY ]] || screen'
 alias sr='[[ -v STY ]] || screen -r'
@@ -26,6 +29,7 @@ alias sl='ls -F --color=auto --show-control-chars'
 alias u='cd ..'
 alias v=vi
 alias vf='vi $(fzf)'
+# x is used for explorer
 alias wget='wget -c'
 alias ..='cd ..'
 alias .2='cd ../..'
