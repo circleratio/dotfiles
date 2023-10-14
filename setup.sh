@@ -69,5 +69,10 @@ make_symlink dein.toml "${SRC}/.vim/dein" "${HOME}/.vim/dein"
 echo ========== directory bookmark ==========
 install_file .dir_bookmark ${HOME}
 
+echo ========== cheet sheet ==========
+if [[ -d ${HOME}/share/cheetsheets ]] ; then
+    make_symlink  cs "${HOME}/share/cheetsheets" "${HOME}/bin" 
+fi
+
 echo Done.
 
