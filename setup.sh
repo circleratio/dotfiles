@@ -31,8 +31,8 @@ function install_dir () {
 
 function make_symlink () {
     if [[ ! -L "$2" ]]; then
-        echo Linking "$1" "$2"
-        echo ln -s "$1" "$2"
+        Linking "$1" "$2"
+        ln -s "$1" "$2"
     else
         echo "$2" already exists. Skipped.
     fi
