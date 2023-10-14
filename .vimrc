@@ -30,3 +30,7 @@ set wildmenu
 set smartcase
 set incsearch
 set autoindent
+set shellslash
+set nobackup
+set nowritebackup
+set encoding=utf-8
