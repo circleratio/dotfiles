@@ -25,6 +25,7 @@ alias sr='[[ -v STY ]] || screen -r'
 alias sl='ls -F --color=auto --show-control-chars'
 alias u='cd ..'
 alias v=vi
+alias vf='vi $(fzf)'
 alias wget='wget -c'
 alias ..='cd ..'
 alias .2='cd ../..'
