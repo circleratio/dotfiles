@@ -1,40 +1,66 @@
 #!/usr/bin/bash
 
 function install_file () {
-    if [ ! -f "$2" ]; then
-        echo Installing "$1" "$2"
-        install -C "$1" "$2"
-    elif [ "$1" -nt "$2" ]; then
-        echo Installing "$1" "$2"
-        install -C "$1" "$2"
+    if [[ ! -f "$2/$1" ]]; then
+        echo Installing "$1" "$2/$1"
+        echo install -C "$1" "$2/$1"
+    elif [[ "$1" -nt "$2/$1" ]]; then
+        echo Source is newer than destination. Installing "$1" "$2/$1"
+        echo install -C "$1" "$2/$1"
+    else
+        echo "$2/$1" already installed. Skipped.
     fi
 }
 
 function install_file_only_if_no_exist () {
-    if [ ! -f "$2" ]; then
+    if [[ ! -f "$2" ]]; then
         echo Installing "$1" "$2"
-        install -C "$1" "$2"
+        echo install -C "$1" "$2"
+    else
+        echo "$2" already exists. Skipped.
     fi
 }
 
-echo Making directories...
-dirs=(bin .emacs.d .emacs.d/site-lisp .emacs.d/scripts)
-for d in "${dirs[@]}"; do
-    install -Cd ~/"$d"
+function install_dir () {
+    if [[ ! -d "$2/$1" ]]; then
+        echo install -Cd "$1" "$2/$1"
+    else
+        echo "$2/$1" already exists. Skipped.
+    fi
+}
+
+function make_symlink () {
+    if [[ ! -L "$2" ]]; then
+        echo Linking "$1" "$2"
+        echo ln -s "$1" "$2"
+    else
+        echo "$2" already exists. Skipped.
+    fi
+}
+
+SRC=$(pwd $(dirname $0))
+
+echo ========== bash ==========
+install_file .bash_profile ${HOME}
+install_file .bashrc ${HOME}
+make_symlink "${SRC}/.bash_aliases" "${HOME}/.bash_aliases"
+
+echo ========== screen ==========
+install_file .screenrc ${HOME}
+
+echo ========== Emacs ==========
+install_dir .emacs.d ${HOME}
+
+echo ========== bin files ==========
+for f in $(ls bin/*); do
+    make_symlink "${SRC}/${f}" "${HOME}/${f}"
 done
 
-echo Install files...
+echo ========== mailcap ==========
+install_file .mailcap ${HOME}
 
-files=(.bash_profile .bashrc .bash_aliases .screenrc bin/* .emacs.d/site-lisp/* .emacs.d/scripts/*)
-
-for f in "${files[@]}"; do
-    install_file "$f" ~/"$f"
-done
-
-files=(.dir_bookmark .emacs.d/init.el)
-for f in "${files[@]}"; do
-    install_file_only_if_no_exist "$f" ~/"$f"
-done
+echo ========== directory bookmark ==========
+install_file .dir_bookmark ${HOME}
 
 echo Done.
 
