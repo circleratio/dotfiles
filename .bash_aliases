@@ -29,7 +29,7 @@ alias sl='ls -F --color=auto --show-control-chars'
 alias t=tt_plan
 alias u='cd ..'
 alias v=vi
-alias vf='vi $(fzf)'
+alias vf='vi "$(fzf)"'
 # x is used for explorer
 alias wget='wget -c'
 alias ..='cd ..'
