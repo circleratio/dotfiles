@@ -1,21 +1,31 @@
 #!/usr/bin/bash
 
 function install_file () {
+    PERM=644
+    if [[ $3 != "" ]]; then
+       echo Permission is specified: $3
+       PERM=$3
+    fi
     if [[ ! -f "$2/$1" ]]; then
         echo Installing "$1" "$2/$1"
-        echo install -C "$1" "$2/$1"
+        install -m ${PERM} -C "$1" "$2/$1"
     elif [[ "$1" -nt "$2/$1" ]]; then
         echo Source is newer than destination. Installing "$1" "$2/$1"
-        echo install -C "$1" "$2/$1"
+        install -m ${PERM} -C "$1" "$2/$1"
     else
         echo "$2/$1" already installed. Skipped.
     fi
 }
 
 function install_file_only_if_no_exist () {
-    if [[ ! -f "$2" ]]; then
-        echo Installing "$1" "$2"
-        echo install -C "$1" "$2"
+    PERM=644
+    if [[ $3 != "" ]]; then
+       echo Permission is specified: $3
+       PERM=$3
+    fi
+    if [[ ! -f "$2/$1" ]]; then
+        echo Installing "$1" "$2/$1"
+        install -m ${PERM} -C "$1" "$2/$1"
     else
         echo "$2" already exists. Skipped.
     fi
@@ -67,7 +77,7 @@ install_dir .vim/dein "${HOME}"
 make_symlink dein.toml "${SRC}/.vim/dein" "${HOME}/.vim/dein" 
 
 echo ========== directory bookmark ==========
-install_file .dir_bookmark ${HOME}
+install_file_only_if_no_exist .dir_bookmark ${HOME}
 
 echo ========== cheet sheet ==========
 if [[ -d ${HOME}/share/cheetsheets ]] ; then
