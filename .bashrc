@@ -29,14 +29,14 @@ function ncd() {
 
 function hi() {
     if [ -f ~/bin/update-workspace ]; then
-        sh ~/bin/update-workspace
+        bash ~/bin/update-workspace
     fi
     cd ~/work
 }
 
 function bye() {
     if [ -f ~/bin/commit-workspace ]; then
-        sh ~/bin/commit-workspace
+        bash ~/bin/commit-workspace
     fi
     echo "Bye!"
 }
