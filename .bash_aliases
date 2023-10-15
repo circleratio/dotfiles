@@ -26,6 +26,7 @@ alias p='python'
 alias s='[[ -v STY ]] || screen'
 alias sr='[[ -v STY ]] || screen -r'
 alias sl='ls -F --color=auto --show-control-chars'
+alias t=tt_plan
 alias u='cd ..'
 alias v=vi
 alias vf='vi $(fzf)'
@@ -35,6 +36,7 @@ alias ..='cd ..'
 alias .2='cd ../..'
 alias .3='cd ../../..'
 alias .4='cd ../../../..'
+alias _='source ~/.bashrc'
 
 if [ `uname -o` = 'GNU/Linux' ]; then
     alias python=python3
