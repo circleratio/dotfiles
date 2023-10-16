@@ -19,6 +19,7 @@ alias l=ls
 alias la='ls -la'
 alias ll='ls -l'
 alias ls='ls -F --color=auto --show-control-chars'
+alias lt='ls --full-time --time-style="+%Y-%m-%d %H:%M:%S" $1 | grep $(date "+%F")'
 alias more=batcat
 alias m=neomutt
 alias md=mkdir
@@ -30,8 +31,9 @@ alias t=tt_plan
 alias u='cd ..'
 alias v=vi
 alias vf='vi "$(fzf)"'
-# x is used for explorer
+alias w='curl -4 http://wttr.in/aichi'
 alias wget='wget -c'
+# x is used for explorer
 alias ..='cd ..'
 alias .2='cd ../..'
 alias .3='cd ../../..'
