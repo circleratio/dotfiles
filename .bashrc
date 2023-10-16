@@ -5,6 +5,7 @@ case $- in
 esac
 
 export HISTCONTROL=ignoredups:ignorespace:erasedups
+export HISTIGNORE='?:??:???:exit'
 
 stty stop undef
 
@@ -70,6 +71,10 @@ else
 fi
 
 unset color_prompt
+
+if [[ -f /usr/share/doc/fzf/examples/key-bindings.bash ]]; then
+    source /usr/share/doc/fzf/examples/key-bindings.bash
+fi
 
 if [ -f ~/.bashrc-personal ]; then
     source ~/.bashrc-personal
