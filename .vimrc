@@ -34,3 +34,11 @@ set shellslash
 set nobackup
 set nowritebackup
 set encoding=utf-8
+
+if has("unix")
+    " unix settings
+elseif has ("win32")
+    set guifont=Terminal:h16:cSHIFTJIS:qDRAFT
+endif
+
+inoremap jk <ESC>
