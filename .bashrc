@@ -72,8 +72,9 @@ fi
 
 unset color_prompt
 
-if [[ -f /usr/share/doc/fzf/examples/key-bindings.bash ]]; then
+if [[ -d /usr/share/doc/fzf/examples ]]; then
     source /usr/share/doc/fzf/examples/key-bindings.bash
+    source  /usr/share/doc/fzf/examples/completion.bash
 fi
 
 if [ -f ~/.bashrc-personal ]; then
