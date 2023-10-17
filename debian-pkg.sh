@@ -2,9 +2,10 @@
 
 apt install \
   git \
+  screen \n
   gpg \
   vim emacs \
-  fzf \
+  fzf bat ripgrep \
   python3 \
   fetchmail procmail neomutt \
   rsync \
