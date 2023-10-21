@@ -1,0 +1,19 @@
+#!/usr/bin/bash
+
+# config
+FONT=~/share/fonts/07やさしさゴシック.ttf
+
+# manage temporary file
+tmpfile=$(mktemp --suffix=.jpg)
+
+function rm_tmpfile {
+    [[ -f "$tmpfile" ]] && rm -f "$tmpfile"
+}
+
+trap rm_tmpfile EXIT
+trap 'trap - EXIT; rm_tmpfile; exit -1' INT PIPE TERM
+
+# main part
+text="$@"
+convert -font ${FONT} -pointsize 30 label:"$text" -negate ${tmpfile}
+jp2a ${tmpfile}
