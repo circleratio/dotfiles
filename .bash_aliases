@@ -1,13 +1,13 @@
 alias apt='sudo apt'
-alias b='cd -'
 # c is used for a shell function
 alias c~='cd ~'
+alias c-='cd -'
 alias e=emacs
 # f is used for fbterm
 alias g=git
 alias ga='git add'
 alias gc='git commit -m'
-alias gd='git diff --name-only'
+alias gd='git diff'
 alias gl='git log --oneline --decorate --graph --branches --tags --remotes --all'
 alias gp='git push'
 alias gps='git push'
@@ -24,6 +24,7 @@ alias lt='ls --full-time --time-style="+%Y-%m-%d %H:%M:%S" $1 | grep $(date "+%F
 alias more=batcat
 alias m=neomutt
 alias md=mkdir
+alias ncd='cd "`ls -td */ | head -1`"'
 alias p='python'
 alias s='[[ -v STY ]] || screen'
 alias sr='[[ -v STY ]] || screen -r'

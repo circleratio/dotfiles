@@ -24,10 +24,6 @@ function mcd() {
     cd "$1"
 }
 
-function ncd() {
-    cd "`ls -td */ | head -1`"
-}
-
 function hi() {
     if [ -f ~/bin/update-workspace ]; then
         bash ~/bin/update-workspace
