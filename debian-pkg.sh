@@ -7,14 +7,25 @@ apt install \
   vim emacs \
   fzf bat ripgrep \
   python3 \
+  imagemagick jp2a \
+  ncal
+
+# network
+  curl wget w3m \
   fetchmail procmail neomutt \
-  rsync \
+  rsync
+
+# documentation
+apt install \
   texlive texlive-latex-extra texlive-fonts-extra texlive-extra-utils texlive-lang-japanese \
   fonts-noto-cjk fonts-mplus \
   fonts-ipafont-gothic fonts-ipafont-mincho \
   fonts-ipaexfont-gothic fonts-ipaexfont-mincho \
   fonts-ipamj-mincho \
-  fonts-vlgothic fonts-migmix \
-  imagemagick
+  fonts-vlgothic fonts-migmix
+
+# jokes
+apt install \
+  sysvbanner cmatrix
 
 echo Done.
