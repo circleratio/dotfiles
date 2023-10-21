@@ -1,6 +1,7 @@
 alias apt='sudo apt'
 alias b='cd -'
 # c is used for a shell function
+alias c~='cd ~'
 alias e=emacs
 # f is used for fbterm
 alias g=git
