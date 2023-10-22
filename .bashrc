@@ -14,28 +14,13 @@ if [ -f ~/.bash_aliases ]; then
 fi
 
 if [ -d /opt/bin ]; then
-    PATH=$PATH:/opt/bin/:$HOME/bin
-else
-    PATH=$PATH:$HOME/bin
+    PATH=$PATH:/opt/bin
 fi
+PATH=$PATH:$HOME/bin
 
 function mcd() {
     mkdir "$1"
     cd "$1"
-}
-
-function hi() {
-    if [ -f ~/bin/update-workspace ]; then
-        bash ~/bin/update-workspace
-    fi
-    cd ~/work
-}
-
-function bye() {
-    if [ -f ~/bin/commit-workspace ]; then
-        bash ~/bin/commit-workspace
-    fi
-    echo "Bye!"
 }
 
 function c() {
@@ -83,5 +68,8 @@ fi
 if [ -f ~/.bashrc-personal ]; then
     source ~/.bashrc-personal
 fi
+
+# remove duplicated path
+export PATH=$(printf %s "$PATH" | awk -v RS=: -v ORS=: '!arr[$0]++')
 
 cd ~
