@@ -60,7 +60,7 @@ fi
 
 unset color_prompt
 
-# supress: it doesn't work well with screen
+# suppress: it doesn't work well with screen
 #if [[ -d /usr/share/doc/fzf/examples ]]; then
 #    source /usr/share/doc/fzf/examples/key-bindings.bash
 #    source /usr/share/doc/fzf/examples/completion.bash
@@ -71,6 +71,6 @@ if [ -f ~/.bashrc-personal ]; then
 fi
 
 # remove duplicated path
-export PATH=$(printf %s "$PATH" | awk -v RS=: -v ORS=: '!arr[$0]++')
+export PATH=$(printf %s "$PATH" | awk -v RS=: -v ORS=: '!arr[$0]++' | sed -e "s/:$//")
 
 cd ~
