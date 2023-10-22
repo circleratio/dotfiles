@@ -41,16 +41,23 @@ function bye() {
 function c() {
     BOOKMARK="~/.dir_bookmark"
     BOOKMARK=`eval echo "$BOOKMARK"`
-    if [ -z $1 ] ; then
-        cat "$BOOKMARK"
+    HOME_STR=`echo $HOME | sed -e 's/\//\\\\\//g' `
+    if [[ -z $1 ]] ; then
+        if  [[ -z $(which fzf) ]] ; then
+	    cat ${BOOKMARK}
+	else
+            local selected
+            selected=$(fzf < "${BOOKMARK}")
+            selected=$(echo ${selected} | sed -e "s/^.*://" -e "s/~/${HOME_STR}/")
+            cd ${selected}
+	fi
     else
-        HOME_STR=`echo $HOME | sed -e 's/\//\\\\\//g' `
-        RES=`grep ^"$1" ~/.dir_bookmark | sed -e "s/^.*://" -e "s/~/$HOME_STR/"`
+        RES=$(grep ^"$1" ~/.dir_bookmark | sed -e "s/^.*://" -e "s/~/${HOME_STR}/")
 
-        if [ -z $RES ] ; then
-            cat "$BOOKMARK"
+        if [[ -z ${RES} ]] ; then
+            cat "${BOOKMARK}"
         else
-           cd "$RES"
+           cd "${RES}"
         fi
     fi
 }
