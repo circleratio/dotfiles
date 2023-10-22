@@ -60,10 +60,11 @@ fi
 
 unset color_prompt
 
-if [[ -d /usr/share/doc/fzf/examples ]]; then
-    source /usr/share/doc/fzf/examples/key-bindings.bash
-    source  /usr/share/doc/fzf/examples/completion.bash
-fi
+# supress: it doesn't work well with screen
+#if [[ -d /usr/share/doc/fzf/examples ]]; then
+#    source /usr/share/doc/fzf/examples/key-bindings.bash
+#    source /usr/share/doc/fzf/examples/completion.bash
+#fi
 
 if [ -f ~/.bashrc-personal ]; then
     source ~/.bashrc-personal
