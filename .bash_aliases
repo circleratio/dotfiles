@@ -1,6 +1,6 @@
 alias apt='sudo apt'
+# b is used for pomera 'battery' command
 # c is used for a shell function
-alias c~='cd ~'
 alias c-='cd -'
 alias e=emacs
 alias f=fzf-rg
@@ -15,18 +15,25 @@ alias gpl='git pull'
 alias gs='git status'
 alias grep='grep --color=auto'
 alias h=history
-alias i='curl ipinfo.io/ip'
+# i
+# j
+# k
 alias l=ls
 alias la='ls -la'
 alias ll='ls -l'
 alias ls='ls -F --color=auto --show-control-chars'
 alias lt='ls --full-time --time-style="+%Y-%m-%d %H:%M:%S" $1 | grep $(date "+%F")'
-alias more=batcat
 alias m=neomutt
 alias md=mkdir
-alias m='mplayer -af volnorm'
+alias more=batcat
+alias mplayer='mplayer -af volnorm'
+alias myip='curl ipinfo.io/ip'
+# n
 alias ncd='cd "`ls -td */ | head -1`"'
+# o
 alias p='python'
+# q
+# r
 alias s='[[ -v STY ]] || screen'
 alias sr='[[ -v STY ]] || screen -r'
 alias sl='ls -F --color=auto --show-control-chars'
@@ -37,6 +44,8 @@ alias vf='vi "$(fzf)"'
 alias w='curl -4 http://wttr.in/aichi'
 alias wget='wget -c'
 # x is used for explorer
+# y
+# z
 alias ..='cd ..'
 alias .2='cd ../..'
 alias .3='cd ../../..'
