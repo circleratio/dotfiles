@@ -24,6 +24,7 @@ alias lt='ls --full-time --time-style="+%Y-%m-%d %H:%M:%S" $1 | grep $(date "+%F
 alias more=batcat
 alias m=neomutt
 alias md=mkdir
+alias m='mplayer -af volnorm'
 alias ncd='cd "`ls -td */ | head -1`"'
 alias p='python'
 alias s='[[ -v STY ]] || screen'
