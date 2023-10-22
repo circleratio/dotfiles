@@ -7,10 +7,15 @@ apt install \
   vim emacs \
   fzf bat ripgrep \
   python3 \
-  imagemagick jp2a \
   ncal
 
+# media
+apt install \
+  imagemagick jp2a \
+  ffmpeg
+
 # network
+apt install \
   curl wget w3m \
   fetchmail procmail neomutt \
   rsync
