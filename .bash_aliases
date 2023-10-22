@@ -3,7 +3,7 @@ alias apt='sudo apt'
 alias c~='cd ~'
 alias c-='cd -'
 alias e=emacs
-# f is used for fbterm
+alias f=fzf-rg
 alias g=git
 alias ga='git add'
 alias gc='git commit -m'
@@ -54,8 +54,7 @@ fi
 
 if [[ $(hostname) == 'pomera' ]]; then
     alias b=battery
-    alias f='LANG=ja_JP.UTF-8 /usr/bin/fbterm -- uim-fep'
-    alias fbterm='LANG=ja_JP.UTF-8 /usr/bin/fbterm -- uim-fep'
+    alias ft='LANG=ja_JP.UTF-8 /usr/bin/fbterm -- uim-fep'
     alias won='sudo /opt/bin/wifi_switch on'
     alias woff='sudo /opt/bin/wifi_switch off'
 fi
