@@ -29,7 +29,6 @@ set hlsearch
 set wildmenu
 set smartcase
 set incsearch
-set autoindent
 set shellslash
 set nobackup
 set nowritebackup
@@ -42,3 +41,8 @@ elseif has ("win32")
 endif
 
 inoremap jk <ESC>
+
+set tabstop=4
+set shiftwidth=4
+set expandtab
+set autoindent
