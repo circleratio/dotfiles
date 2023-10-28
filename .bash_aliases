@@ -35,12 +35,13 @@ alias myip='curl ipinfo.io/ip'
 alias ncd='cd "`ls -td */ | head -1`"'
 # o
 alias p='python'
+alias plan=tt_plan
 # q
 # r
 alias s='[[ -v STY ]] || screen'
 alias sr='[[ -v STY ]] || screen -r'
 alias sl='ls -F --color=auto --show-control-chars'
-alias t=tt_plan
+# t
 alias u='cd ..'
 alias v=vi
 alias vf='vi "$(fzf)"'
@@ -57,7 +58,7 @@ alias _='source ~/.bashrc'
 
 if [[ $(uname -o) = 'GNU/Linux' ]]; then
     alias python=python3
-    alias md2x='python3 ~/tmp/md2x/md2x.py'
+    alias md2x='python3 ~/share/md2x/md2x.py'
 fi
 
 if [[ $(uname -o) == 'Msys' ]]; then
