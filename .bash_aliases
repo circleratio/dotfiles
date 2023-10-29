@@ -41,6 +41,7 @@ alias plan=tt_plan
 alias s='[[ -v STY ]] || screen'
 alias sr='[[ -v STY ]] || screen -r'
 alias sl='ls -F --color=auto --show-control-chars'
+alias sw=status-workspace
 # t
 alias u='cd ..'
 alias v=vi
