@@ -4,6 +4,17 @@ case $- in
       *) return;;
 esac
 
+case $(uname -m) in
+    armv7l)
+    export LANG=ja_JP.UTF-8
+    export LC_ALL=ja_JP.UTF-8
+    ;;
+    *)
+    export LANG=C.UTF-8
+    export LC_ALL=C.UTF-8
+    ;;
+esac
+
 export HISTCONTROL=ignoredups:ignorespace:erasedups
 export HISTIGNORE='?:??:???:exit'
 
@@ -46,6 +57,14 @@ function c() {
         fi
     fi
 }
+
+function fzf_history() {
+    local l
+    l=$(HISTTIMEFORMAT='' history | sed -e 's/^[[:space:]]*[0-9]\+[[:space:]]*//' | fzf --query "$READLINE_LINE")
+    READLINE_LINE="$l"
+    READLINE_POINT=${#l}
+}
+bind -x '"\C-r": fzf_history'
 
 # prompt                                                                                                                        
 case "$TERM" in

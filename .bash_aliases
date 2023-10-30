@@ -3,10 +3,11 @@ alias apt='sudo apt'
 # c is used for a shell function
 alias c-='cd -'
 alias e=emacs
+alias ef='emacs "$(fzf)"'
 alias f=fzf-rg
 alias g=git
 alias ga='git add'
-alias gc='git commit -m'
+alias gc='git commit'
 alias gd='git diff'
 alias gl='git log --oneline --decorate --graph --branches --tags --remotes --all'
 alias gp='git push'
@@ -25,19 +26,23 @@ alias ls='ls -F --color=auto --show-control-chars'
 alias lt='ls --full-time --time-style="+%Y-%m-%d %H:%M:%S" $1 | grep $(date "+%F")'
 alias m=neomutt
 alias md=mkdir
+alias mo=batcat
 alias more=batcat
 alias mplayer='mplayer -af volnorm'
+alias mf='mplayer -af volnorm $(fzf)'
 alias myip='curl ipinfo.io/ip'
 # n
 alias ncd='cd "`ls -td */ | head -1`"'
 # o
 alias p='python'
+alias plan=tt_plan
 # q
 # r
 alias s='[[ -v STY ]] || screen'
 alias sr='[[ -v STY ]] || screen -r'
 alias sl='ls -F --color=auto --show-control-chars'
-alias t=tt_plan
+alias sw=status-workspace
+# t
 alias u='cd ..'
 alias v=vi
 alias vf='vi "$(fzf)"'
@@ -52,12 +57,12 @@ alias .3='cd ../../..'
 alias .4='cd ../../../..'
 alias _='source ~/.bashrc'
 
-if [ `uname -o` = 'GNU/Linux' ]; then
+if [[ $(uname -o) = 'GNU/Linux' ]]; then
     alias python=python3
-    alias md2x='python3 ~/tmp/md2x/md2x.py'
+    alias md2x='python3 ~/share/md2x/md2x.py'
 fi
 
-if [ `uname -o` = 'Msys' ]; then
+if [[ $(uname -o) == 'Msys' ]]; then
     alias x='explorer .'
 fi
 

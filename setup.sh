@@ -54,7 +54,7 @@ SRC=$(pwd $(dirname $0))
 
 echo ========== bash ==========
 install_file .bash_profile ${HOME}
-install_file .bashrc ${HOME}
+make_symlink .bashrc "${SRC}" "${HOME}"
 make_symlink .bash_aliases "${SRC}" "${HOME}"
 
 echo ========== screen ==========
