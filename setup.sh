@@ -58,7 +58,7 @@ install_file .bashrc ${HOME}
 make_symlink .bash_aliases "${SRC}" "${HOME}"
 
 echo ========== screen ==========
-install_file .screenrc ${HOME}
+make_symlink .screenrc "${SRC}" "${HOME}"
 
 echo ========== Emacs ==========
 install_dir .emacs.d ${HOME}
@@ -69,7 +69,7 @@ for f in $(ls bin/*); do
 done
 
 echo ========== mailcap ==========
-install_file .mailcap ${HOME}
+make_symlink .mailcap "${SRC}" "${HOME}"
 
 echo ========== vim ==========
 make_symlink .vimrc "${SRC}" "${HOME}"
