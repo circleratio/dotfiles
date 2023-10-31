@@ -68,6 +68,7 @@ fi
 
 if [[ $(hostname) == 'pomera' ]]; then
     alias b=battery
+    alias fbterm='LANG=ja_JP.UTF-8 /usr/bin/fbterm -- uim-fep'
     alias ft='LANG=ja_JP.UTF-8 /usr/bin/fbterm -- uim-fep'
     alias won='sudo /opt/bin/wifi_switch on'
     alias woff='sudo /opt/bin/wifi_switch off'
