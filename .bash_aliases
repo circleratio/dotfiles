@@ -2,6 +2,7 @@ alias apt='sudo apt'
 # b is used for pomera 'battery' command
 # c is used for a shell function
 alias c-='cd -'
+# d is used for diary
 alias e=emacs
 alias ef='emacs "$(fzf)"'
 alias f=fzf-rg
