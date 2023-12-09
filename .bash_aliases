@@ -40,8 +40,7 @@ alias p='python'
 alias plan=tt_plan
 # q
 # r
-alias s='[[ -v STY ]] || screen'
-alias sr='[[ -v STY ]] || screen -r'
+alias s='[[ -v STY ]] || screen -R'
 alias sl='ls -F --color=auto --show-control-chars'
 # t
 alias u='cd ..'
