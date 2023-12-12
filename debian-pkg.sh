@@ -47,4 +47,7 @@ apt install docker-ce docker-ce-cli containerd.io docker-compose-plugin
 
 usermod -aG docker ${SETUP_USER}
 
+# python modules
+pip install python-dateutil
+
 echo Done.
