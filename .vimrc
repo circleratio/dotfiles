@@ -41,6 +41,7 @@ elseif has ("win32")
 endif
 
 inoremap jk <ESC>
+nnoremap gr :tabprevious
 
 set tabstop=4
 set shiftwidth=4
