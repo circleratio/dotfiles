@@ -25,9 +25,14 @@ if [ -f ~/.bash_aliases ]; then
 fi
 
 if [ -d /opt/bin ]; then
-    PATH=$PATH:/opt/bin
+    PATH=${PATH}:/opt/bin
 fi
-PATH=$PATH:$HOME/bin
+if [ -d ${HOME}/.local/bin ]; then
+    PATH=${PATH}:${HOME}/.local/bin
+fi
+if [ -d ${HOME}/bin ]; then
+    PATH=${PATH}:${HOME}/bin
+fi
 
 function mcd() {
     mkdir "$1"
