@@ -18,6 +18,8 @@ esac
 export HISTCONTROL=ignoredups:ignorespace:erasedups
 export HISTIGNORE='?:??:???:exit'
 
+export EDITOR=vim
+
 stty stop undef
 
 if [ -f ~/.bash_aliases ]; then
