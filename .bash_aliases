@@ -53,6 +53,8 @@ alias weather='curl -4 http://wttr.in/aichi'
 alias wget='wget -c'
 # x is used for explorer
 # y
+alias yt=yt-dlp
+alias yta='yt-dlp -x --audio-format mp3'
 # z
 alias ..='cd ..'
 alias .2='cd ../..'
