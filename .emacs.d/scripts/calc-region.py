@@ -47,7 +47,7 @@ sys.stderr.reconfigure(encoding="utf_8")
 
 for line in sys.stdin:
     orig = line
-    line = re.sub('\(.*\)', '', line)
+    line = re.sub('\\(.*\\)', '', line)
     m = re.search('{.*}', line)
     if m:
         res = []
