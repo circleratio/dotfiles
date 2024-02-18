@@ -35,6 +35,7 @@ alias mo=batcat
 alias more=batcat
 alias mplayer='mplayer -af volnorm'
 alias mf='mplayer -af volnorm $(fzf)'
+alias mr='mpg123 -z'
 # n
 alias ncd='cd "`ls -td */ | head -1`"'
 # o
