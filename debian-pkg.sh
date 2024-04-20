@@ -31,7 +31,8 @@ apt install \
   fonts-ipafont-gothic fonts-ipafont-mincho \
   fonts-ipaexfont-gothic fonts-ipaexfont-mincho \
   fonts-ipamj-mincho \
-  fonts-vlgothic fonts-migmix
+  fonts-vlgothic fonts-migmix \
+  translate-shell
 
 # jokes
 apt install \
