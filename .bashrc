@@ -99,4 +99,7 @@ fi
 # remove duplicated path
 export PATH=$(printf %s "$PATH" | awk -v RS=: -v ORS=: '!arr[$0]++' | sed -e "s/:$//")
 
+# zoxide
+eval "$(zoxide init bash)"
+
 cd ~
