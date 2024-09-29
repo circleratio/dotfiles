@@ -5,12 +5,17 @@ apt update
 
 apt install \
   lsb-release \
-  git \
   screen \
   vim emacs \
   fzf bat ripgrep \
-  python3 \
+  zoxide \
   ncal
+
+# development
+apt install \
+  git \
+  python3 \
+  shellcheck
 
 # media
 apt install \
