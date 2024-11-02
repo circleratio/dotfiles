@@ -19,3 +19,6 @@ hook_add = '''
         nnoremap <C-h> :History<CR>
 '''
 
+[[plugins]] # GnuPG Encrypt
+repo = 'jamessan/vim-gnupg'
+
