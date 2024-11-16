@@ -3,6 +3,7 @@ import sys
 import argparse
 import re
 import os
+import pathlib
 
 class mail_draft:
     def __init__(self):
@@ -62,11 +63,12 @@ def parse_file(path):
 
                     m = re.match('[Aa]ttachment: *(.*)', l)
                     if m:
-                        a = m.group(1)
-                        if os.path.isfile(a):
-                            md.attachments.append(a)
+                        a = m.group(1).strip('\"')
+                        p = str(pathlib.Path(a).expanduser())
+                        if os.path.isfile(p):
+                            md.attachments.append(p)
                         else:
-                            print(f'Warning: {a} does not exist.')
+                            print(f'Warning: {p} does not exist.')
                     
     return md
 

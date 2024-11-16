@@ -9,7 +9,7 @@
 (defvar mail-draft-folder-drafts (concat mail-draft-folder-root "/drafts"))
 (defvar mail-draft-folder-sent (concat mail-draft-folder-root "/sent"))
 
-(defvar mail-draft-template "To: \nCc: \nSubject: \n---\n")
+(defvar mail-draft-template "To: \nCc: \nBcc: \nSubject: \nAttachment: \n---\n")
 
 (defvar mail-sender-script (concat (expand-file-name "~") "/.emacs.d/scripts/ol_comp.py"))
 
