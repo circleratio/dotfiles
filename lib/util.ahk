@@ -14,13 +14,13 @@ A_MaxHotkeysPerInterval := 200
 !k::Up
 !l::Right
 
-;; Alt-o で半角/全角
-!o::SC029
+;; Ctrl-o で半角/全角
+^o::SC029
 
 ;
 ; Outlook, Powerpoint, Teams でEmacs風キーバインドを設定。
 ;
-#HotIf WinActive("ahk_exe outlook.exe", ) or WinActive("ahk_exe powerpnt.exe", ) or WinActive("ahk_exe ms-teams.exe", )
+#HotIf WinActive("ahk_exe outlook.exe", ) or WinActive("ahk_exe powerpnt.exe", ) or WinActive("ahk_exe ms-teams.exe", ) or WinActive("ahk_exe notepad.exe", )
 ^b::Send "{Left}"
 ^f::Send "{Right}"
 ^p::Send "{Up}"
@@ -50,14 +50,7 @@ A_MaxHotkeysPerInterval := 200
 ;
 $(::SendInput "({}){Left}"
 $[::SendInput "[{}]{Left}"
-${::
-{
-    bk := A_Clipboard
-    A_Clipboard := "{}"
-    Send "+{INSERT}"
-    SendInput "{Left}"
-    A_Clipboard := bk
-}
+${::SendInput "{{}{}}{Left}"
 
 ;
 ; アプリ起動 (Ctrl + Shift + アプリの頭文字)
