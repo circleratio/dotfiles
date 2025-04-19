@@ -17,6 +17,10 @@ A_MaxHotkeysPerInterval := 200
 ;; Ctrl-o で半角/全角
 ^o::SC029
 
+;; Alt-o/p でIMEのON/OFF
+!o::IME_SET(1)
+!p::IME_SET(0)
+
 ;
 ; Outlook, Powerpoint, Teams でEmacs風キーバインドを設定。
 ;
@@ -262,4 +266,24 @@ global
             MsgBox "Edge が起動していません"
         }
     }
+}
+
+;
+; IME ON/OFF
+;
+IME_SET(SetSts, WinTitle:="A")    {
+    hwnd := WinExist(WinTitle)
+    if  (WinActive(WinTitle))   {
+        ptrSize := !A_PtrSize ? 4 : A_PtrSize
+        cbSize := 4+4+(PtrSize*6)+16
+        stGTI := Buffer(cbSize,0)
+        NumPut("Uint", cbSize, stGTI.Ptr,0)   ;   DWORD   cbSize;
+        hwnd := DllCall("GetGUIThreadInfo", "Uint",0, "Uint",stGTI.Ptr)
+                 ? NumGet(stGTI.Ptr,8+PtrSize,"Uint") : hwnd
+    }
+    return DllCall("SendMessage"
+          , "UInt", DllCall("imm32\ImmGetDefaultIMEWnd", "Uint",hwnd)
+          , "UInt", 0x0283  ;Message : WM_IME_CONTROL
+          ,  "Int", 0x006   ;wParam  : IMC_SETOPENSTATUS
+          ,  "Int", SetSts) ;lParam  : 0 or 1
 }
