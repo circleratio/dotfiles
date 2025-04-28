@@ -52,6 +52,7 @@ alias sl='ls -F --color=auto --show-control-chars'
 alias u='cd ..'
 alias v=vim
 alias vf='vim "$(fzf)"'
+alias vf.='`find . -type f | fzf`'
 alias w='status-workspace | sed -e /^$/d -e "/^On branch/d" -e "/^Your branch is up to date/d" -e "/^nothing to commit,/d"'
 alias weather='curl -4 http://wttr.in/aichi'
 alias wget='wget -c'
