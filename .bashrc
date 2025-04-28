@@ -26,15 +26,16 @@ if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 
-if [ -d /opt/bin ]; then
-    PATH=${PATH}:/opt/bin
-fi
-if [ -d ${HOME}/.local/bin ]; then
-    PATH=${PATH}:${HOME}/.local/bin
-fi
-if [ -d ${HOME}/bin ]; then
-    PATH=${PATH}:${HOME}/bin
-fi
+function add_path() {
+    if [ -d "$1" ]; then
+        PATH=${PATH}:"$1"
+    fi
+}
+
+add_path /opt/bin
+add_path "${HOME}/.local/bin"
+add_path "${HOME}/bin"
+add_path /ucrt64/bin
 
 function mcd() {
     mkdir "$1"
