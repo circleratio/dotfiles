@@ -31,7 +31,7 @@ A_MaxHotkeysPerInterval := 200
 ;
 ; Outlook, Powerpoint, Teams でEmacs風キーバインドを設定。
 ;
-#HotIf WinActive("ahk_exe outlook.exe", ) or WinActive("ahk_exe powerpnt.exe", ) or WinActive("ahk_exe ms-teams.exe", ) or WinActive("ahk_exe notepad.exe", )
+#HotIf WinActive("ahk_exe outlook.exe", ) or WinActive("ahk_exe powerpnt.exe", ) or WinActive("ahk_exe ms-teams.exe", ) or WinActive("ahk_exe notepad.exe", ) or WinActive("ahk_exe msedge.exe", ) or WinActive("ahk_exe chrome.exe", )
 ^b::Send "{Left}"
 ^f::Send "{Right}"
 ^p::Send "{Up}"
