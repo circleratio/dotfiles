@@ -73,6 +73,16 @@ function fzf_history() {
 }
 bind -x '"\C-r": fzf_history'
 
+function fkill() {
+  local pid
+  pid=$(ps -ef | sed 1d | fzf -m | awk '{print $2}')
+
+  if [ "x$pid" != "x" ]
+  then
+    echo $pid | xargs kill -${1:-9}
+  fi
+}
+
 # prompt                                                                                                                        
 case "$TERM" in
     xterm|xterm-color|*-256color|screen) color_prompt=yes;;
