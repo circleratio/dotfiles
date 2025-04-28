@@ -21,6 +21,13 @@ A_MaxHotkeysPerInterval := 200
 !o::IME_SET(1)
 !p::IME_SET(0)
 
+;; ホームポジションから手を動かさない設定
+;; HOME/END
+!n::Home
+!m::End
+!,::PgDn
+!.::PgUp
+
 ;
 ; Outlook, Powerpoint, Teams でEmacs風キーバインドを設定。
 ;
