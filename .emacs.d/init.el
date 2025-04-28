@@ -156,13 +156,13 @@
   :doc "delete selection when you insert something."
   :global-minor-mode delete-selection-mode)
 
-(leaf windmove
-  :config
-  (windmove-default-keybindings 'meta) ; move to another windowusing with Meta + arrow keys
-  :bind (("<left>" . windmove-left) ; move to another window only arrow keys
-         ("<right>" . windmove-right)
-         ("<up>" . windmove-up)
-         ("<down>" . windmove-down)))
+;(leaf windmove
+;  :config
+;  (windmove-default-keybindings 'meta) ; move to another windowusing with Meta + arrow keys
+;  :bind (("<left>" . windmove-left) ; move to another window only arrow keys
+;         ("<right>" . windmove-right)
+;         ("<up>" . windmove-up)
+;         ("<down>" . windmove-down)))
 
 (leaf multiple-cursors
   :ensure t
