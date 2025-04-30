@@ -78,7 +78,7 @@ ${::SendInput "{{}{}}{Left}"
 {
     TimeString := FormatTime(,"yyMMdd")
     A_Clipboard := TimeString
-    Send "+{INSERT}"
+    Send("+{INSERT}")
 }
 
 ;
@@ -150,9 +150,9 @@ get_current_dir() {
 !q::
 {
     If WinActive("ahk_exe chrome.exe")|| WinActive("ahk_exe msedge.exe")|| WinActive("ahk_exe firefox.exe")|| WinActive("ahk_exe Code.exe") {
-        Send "^{w}"
+        Send("^{w}")
     } Else {
-        Send "!{F4}"
+        Send("!{F4}")
     }
 }
 
@@ -199,8 +199,8 @@ global
         dowstr := get_dowstr(FormatTime(datestr, "WDay"))
         
         A_Clipboard := TimeString . dowstr
-        Sleep 150
-        Send "+{INSERT}"
+        Sleep(150)
+        Send("+{INSERT}")
     }
 }
 
@@ -238,28 +238,29 @@ global
         
         text_cb := A_Clipboard
     
-        Sleep 150
+        Sleep(150)
         A_Clipboard := prompts[Selection]
-        Send "+{INSERT}"
-        Sleep 150
+        Send("+{INSERT}")
+        Sleep(150)
         A_Clipboard := text_cb
-        Send "+{INSERT}"
+        Send("+{INSERT}") 
     }
 }
 
 ;
 ; Alt+Shift+g: クリップボードの文字列をEdgeで検索(デフォルトの検索エンジン)
 ;
-!+g::{
+!+g::
+{
     copied := String(A_Clipboard)
     if (copied != "") {
         if WinExist("ahk_exe msedge.exe") {
             WinActivate
-            Send "^t"
-            Send copied
-            Send "{Enter}"
+            Send("^t")
+            Send(copied)
+            Send("{Enter}")
         } else {
-            MsgBox "Edge が起動していません"
+            MsgBox("Edge が起動していません")
         }
     }
 }
@@ -269,37 +270,34 @@ global
 ;
 !g::
 {
-global
-    searchGui := Gui()
-    searchGui.SetFont("s16")
-    searchGui.Title := "検索"
-    
-    osEdit_str_keyword := searchGui.Add("Edit", "v_str_keyword w380")
-    osButtonAppend := searchGui.Add("Button", "Default", "Search")
-    osButtonAppend.OnEvent("Click", ButtonAppend.Bind("Normal"))
-    
-    searchGui.Show("Center w400")
-    Return
-}
-    ButtonAppend(A_GuiEvent := "", GuiCtrlObj := "", Info := "", *)
-{
-global
-    osSaved := searchGui.Submit()
-    _str_keyword := osSaved._str_keyword
-    if WinExist("ahk_exe msedge.exe") {
-        WinActivate
-        Send("{vkF2}{vkF3}")
-        Send "^t"
-        Send _str_keyword
-        Send "{Enter}"
-    } else {
-        MsgBox "Edge が起動していません"
+    {
+        searchGui := Gui()
+        searchGui.SetFont("s16")
+        searchGui.Title := "検索"
+        searchGui.Add("Edit", "v_str_keyword w380")
+        searchGui.Add("Button", "Default", "Search").OnEvent("Click", SearchKeyword)
+        searchGui.Show("Center w440")
     }
 
-    _3GuiEscape:
-    _3GuiClose:
+    CloseWindow(*)
+    {
         searchGui.Destroy()
-    Return
+    }
+
+    SearchKeyword(*)
+    {
+        Saved := searchGui.Submit()
+        _str_keyword := Saved._str_keyword
+        if WinExist("ahk_exe msedge.exe") {
+            WinActivate
+            Send("{vkF2}{vkF3}")
+            Send("^t")
+            Send(_str_keyword)
+            Send("{Enter}")
+        } else {
+            MsgBox "Edge が起動していません"
+        }
+    }
 }
 
 ;
@@ -367,10 +365,10 @@ class Launcher
 
     LaunchApp(app)
     {
-        Run app,,, &app_pid
-        WinWait "ahk_pid " app_pid
+        Run(app,,, &app_pid)
+        WinWait("ahk_pid " app_pid)
         WinActivate
-        WinMove 0, 0, A_ScreenWidth, A_ScreenHeight
+        WinMove(0, 0, A_ScreenWidth, A_ScreenHeight) 
 
         this.CloseWindow(this.myGui)
     }
