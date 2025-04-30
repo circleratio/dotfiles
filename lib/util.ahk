@@ -5,7 +5,7 @@ A_HotkeyInterval := 2000
 A_MaxHotkeysPerInterval := 200
 
 ;
-; キー設定
+; キー設定 (ホームポジションから手を動かさない設定)
 ;
 
 ;; vi風カーソル移動
@@ -14,6 +14,12 @@ A_MaxHotkeysPerInterval := 200
 !k::Up
 !l::Right
 
+;; Home/End/PgDn/PgUpをvi風カーソル移動の下段に配置
+!n::Home
+!m::End
+!,::PgDn
+!.::PgUp
+
 ;; Ctrl-o で半角/全角
 ^o::SC029
 
@@ -21,15 +27,8 @@ A_MaxHotkeysPerInterval := 200
 !o::IME_SET(1)
 !p::IME_SET(0)
 
-;; ホームポジションから手を動かさない設定
-;; HOME/END
-!n::Home
-!m::End
-!,::PgDn
-!.::PgUp
-
 ;
-; Outlook, Powerpoint, Teams でEmacs風キーバインドを設定。
+; MS365、メモ帳、ウェブブラウザでEmacs風キーバインドを設定。
 ;
 #HotIf WinActive("ahk_exe outlook.exe", ) or WinActive("ahk_exe powerpnt.exe", ) or WinActive("ahk_exe ms-teams.exe", ) or WinActive("ahk_exe notepad.exe", ) or WinActive("ahk_exe msedge.exe", ) or WinActive("ahk_exe chrome.exe", )
 ^b::Send "{Left}"
@@ -82,7 +81,7 @@ ${::SendInput "{{}{}}{Left}"
 }
 
 ;
-; 日付を入力("月/日(曜日)"形式)
+; 日付を入力("月/日(曜日) 時:分"形式)
 ;
 ^2::
 {
@@ -97,13 +96,13 @@ ${::SendInput "{{}{}}{Left}"
 get_dowstr(theNum)
 {
     dowtable := "日月火水木金土"
-    ; Wday は日曜日が 1、
+    ; Wday は日曜日が 1
     dowstr := SubStr(dowtable, theNum, 1)
     return "(" . dowstr . ")"
 }
 
 ;
-; 任意の名前で空ファイルを作る(エクスプローラ上のみで動作)
+; 任意の名前で空ファイルを作る(エクスプローラ上で動作)
 ;
 ^3::
 {
@@ -248,7 +247,7 @@ global
 }
 
 ;
-; Alt+Shift+g: クリップボードの文字列をEdgeで検索(デフォルトの検索エンジン)
+; Alt+Shift+g: クリップボードの文字列をEdgeで検索(デフォルトの検索エンジンを使用)
 ;
 !+g::
 {
@@ -266,7 +265,7 @@ global
 }
 
 ;
-; Alt-g: 文字列を入力してEdgeで検索(デフォルトの検索エンジン)
+; Alt-g: 文字列を入力してEdgeで検索(デフォルトの検索エンジンを使用)
 ;
 !g::
 {
@@ -321,7 +320,7 @@ IME_SET(SetSts, WinTitle:="A")    {
 }
 
 ;
-; ランチャー
+; ランチャー(Alt-Gで起動の後、アルファベット1文字のタイプで起動するアプリを選択する)
 ;
 !i::
 {
