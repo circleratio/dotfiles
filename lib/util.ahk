@@ -103,32 +103,9 @@ get_dowstr(theNum)
 }
 
 ;
-; メモ帳を開く
-;
-^3::
-{
-    Run "notepad.exe",,, &notepad_pid
-    WinWait "ahk_pid " notepad_pid
-    WinActivate
-    WinMove 0, 0, A_ScreenWidth/4, A_ScreenHeight/2
-}
-
-;
-; アクティブウィンドウを閉じる
-;
-^4::
-{
-    If WinActive("ahk_exe chrome.exe")|| WinActive("ahk_exe msedge.exe")|| WinActive("ahk_exe firefox.exe")|| WinActive("ahk_exe Code.exe") {
-        Send "^{w}"
-    } Else {
-        Send "!{F4}"
-    }
-}
-
-;
 ; 任意の名前で空ファイルを作る(エクスプローラ上のみで動作)
 ;
-^5::
+^3::
 {
 global
     If (!WinActive("ahk_class CabinetWClass")) {
@@ -168,9 +145,21 @@ get_current_dir() {
 }
 
 ;
+; アクティブウィンドウを閉じる
+;
+!q::
+{
+    If WinActive("ahk_exe chrome.exe")|| WinActive("ahk_exe msedge.exe")|| WinActive("ahk_exe firefox.exe")|| WinActive("ahk_exe Code.exe") {
+        Send "^{w}"
+    } Else {
+        Send "!{F4}"
+    }
+}
+
+;
 ; 引用記号を追加してペースト
 ;
-^6::
+!y::
 {
 global
     StrRefMsg := "> " . RegExReplace(A_Clipboard, "\n", "`n> ")
@@ -298,7 +287,7 @@ IME_SET(SetSts, WinTitle:="A")    {
 ;
 ; ランチャー
 ;
-!y::
+!i::
 {
     global MyLauncher
     MyLauncher := Launcher()
