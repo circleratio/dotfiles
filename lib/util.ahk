@@ -107,31 +107,31 @@ get_dowstr(theNum)
 ;
 ^3::
 {
-global
-    If (!WinActive("ahk_class CabinetWClass")) {
-      MsgBox("explore is not active")
-      Return
+    {
+        If (!WinActive("ahk_class CabinetWClass"))
+        {
+            MsgBox("explore is not active")
+            Return
+        }
+        current_dir := get_current_dir()
+        fileGui := Gui(, "空ファイル作成")
+        fileGui.Add("Edit", "v_str_filename w380")
+        fileGui.Add("Button", "default", "OK").OnEvent("Click", AppendFile)
+        fileGui.OnEvent("Escape", CloseWindow)
+        fileGui.Show("Center w400")
     }
-    current_dir := get_current_dir()
-    myGui := Gui()
-    ogcEdit_str_filename := myGui.Add("Edit", "v_str_filename w380")
-    ogcButtonAppend := myGui.Add("Button", "Default", "Append")
-    ogcButtonAppend.OnEvent("Click", ButtonAppend.Bind("Normal"))
-    myGui.Title := "ファイル名"
-    myGui.Show("Center w400")
-    Send("{vkF2}{vkF3}")
-    Return
-}
-    ButtonAppend(A_GuiEvent := "", GuiCtrlObj := "", Info := "", *)
-{
-global
-    oSaved := myGui.Submit()
-    _str_filename := oSaved._str_filename
-    FileAppend("", current_dir "\" _str_filename)
-    _3GuiEscape:
-    _3GuiClose:
-        myGui.Destroy()
-    Return
+
+    CloseWindow(*)
+    {
+        fileGui.Destroy()
+    }
+
+    AppendFile(*)
+    {
+        Saved := fileGui.Submit()
+        _str_filename := Saved._str_filename
+        FileAppend("", current_dir "\" _str_filename)
+    }
 }
 
 get_current_dir() {
@@ -248,9 +248,9 @@ global
 }
 
 ;
-; クリップボードの文字列をGoogle検索(Edge前提)
+; Alt+Shift+g: クリップボードの文字列をEdgeで検索(デフォルトの検索エンジン)
 ;
-!g::{
+!+g::{
     copied := String(A_Clipboard)
     if (copied != "") {
         if WinExist("ahk_exe msedge.exe") {
@@ -262,6 +262,44 @@ global
             MsgBox "Edge が起動していません"
         }
     }
+}
+
+;
+; Alt-g: 文字列を入力してEdgeで検索(デフォルトの検索エンジン)
+;
+!g::
+{
+global
+    searchGui := Gui()
+    searchGui.SetFont("s16")
+    searchGui.Title := "検索"
+    
+    osEdit_str_keyword := searchGui.Add("Edit", "v_str_keyword w380")
+    osButtonAppend := searchGui.Add("Button", "Default", "Search")
+    osButtonAppend.OnEvent("Click", ButtonAppend.Bind("Normal"))
+    
+    searchGui.Show("Center w400")
+    Return
+}
+    ButtonAppend(A_GuiEvent := "", GuiCtrlObj := "", Info := "", *)
+{
+global
+    osSaved := searchGui.Submit()
+    _str_keyword := osSaved._str_keyword
+    if WinExist("ahk_exe msedge.exe") {
+        WinActivate
+        Send("{vkF2}{vkF3}")
+        Send "^t"
+        Send _str_keyword
+        Send "{Enter}"
+    } else {
+        MsgBox "Edge が起動していません"
+    }
+
+    _3GuiEscape:
+    _3GuiClose:
+        searchGui.Destroy()
+    Return
 }
 
 ;
