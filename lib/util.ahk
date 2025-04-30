@@ -294,3 +294,70 @@ IME_SET(SetSts, WinTitle:="A")    {
           ,  "Int", 0x006   ;wParam  : IMC_SETOPENSTATUS
           ,  "Int", SetSts) ;lParam  : 0 or 1
 }
+
+;
+; ランチャー
+;
+!y::
+{
+    global MyLauncher
+    MyLauncher := Launcher()
+}
+
+class Launcher
+{
+    __New()
+    {
+        this.myGui := Gui(, "My App Launcher")
+        this.myGui.SetFont("s16")
+    
+        this.myGui.OnEvent("Close", this.onClose)
+        this.myGui.OnEvent("Escape", this.onClose)
+
+        this.myGui.Add("Text",, "i: Paint")
+        this.myGui.Add("Text",, "n: Notepad")
+        this.myGui.Add("Text",, "p: Powerpoint")
+        this.myGui.Add("Text",, "w: Word")
+        this.myGui.Add("Text",, "e: Excel")
+        this.myGui.Add("Text",, "t: Teams")
+        this.myGui.Add("Text",, "b: Edge")
+        this.myGui.Add("Text",, "c: Chrome")
+        this.myGui.Add("Text",, "r: RLogin")
+        this.myGui.Add("Text",, "x: GNU Emacs")
+    
+        this.myGui.Show("w200 h425")
+    }
+    
+    onClose(*)
+    {
+        this.Destroy()
+    }
+    
+    CloseWindow(*)
+    {
+        this.myGui.Destroy()
+    }
+
+    LaunchApp(app)
+    {
+        Run app,,, &app_pid
+        WinWait "ahk_pid " app_pid
+        WinActivate
+        WinMove 0, 0, A_ScreenWidth, A_ScreenHeight
+
+        this.CloseWindow(this.myGui)
+    }
+}
+
+#Hotif WinActive("My App Launcher")
+b::MyLauncher.LaunchApp("msedge.exe")
+c::MyLauncher.LaunchApp("chrome.exe")
+e::MyLauncher.LaunchApp("excel.exe")
+i::MyLauncher.LaunchApp("mspaint.exe")
+n::MyLauncher.LaunchApp("notepad.exe")
+p::MyLauncher.LaunchApp("powerpnt.exe")
+r::MyLauncher.LaunchApp("RLogin.exe")
+t::MyLauncher.LaunchApp("ms-teams.exe")
+w::MyLauncher.LaunchApp("winword.exe")
+x::MyLauncher.LaunchApp("runemacs.exe")
+#Hotif
