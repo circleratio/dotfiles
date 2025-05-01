@@ -252,16 +252,7 @@ global
 !+g::
 {
     copied := String(A_Clipboard)
-    if (copied != "") {
-        if WinExist("ahk_exe msedge.exe") {
-            WinActivate
-            Send("^t")
-            Send(copied)
-            Send("{Enter}")
-        } else {
-            MsgBox("Edge が起動していません")
-        }
-    }
+    edge_search_keyword(copied)
 }
 
 ;
@@ -286,16 +277,23 @@ global
     SearchKeyword(*)
     {
         Saved := searchGui.Submit()
-        _str_keyword := Saved._str_keyword
-        if WinExist("ahk_exe msedge.exe") {
-            WinActivate
-            Send("{vkF2}{vkF3}")
-            Send("^t")
-            Send(_str_keyword)
-            Send("{Enter}")
-        } else {
-            MsgBox "Edge が起動していません"
-        }
+        edge_search_keyword(Saved._str_keyword)
+    }
+}
+
+edge_search_keyword(keyword)
+{
+    if !WinExist("ahk_exe msedge.exe") {
+        Run("msedge.exe",,, &app_pid)
+        sleep(1000)
+    }            
+    if WinExist("ahk_exe msedge.exe") {
+        WinActivate
+        WinMove(0, 0, A_ScreenWidth, A_ScreenHeight)
+        Send("{vkF2}{vkF3}")
+        Send("^t")
+        Send(keyword)
+        Send("{Enter}")
     }
 }
 
