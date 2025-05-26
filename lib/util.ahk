@@ -208,9 +208,9 @@ global
 ;
 ::]p::
 {
-    prompts := ["以下の文を日本語に翻訳してください。`n",
-                "I want you to act as an English translator, spelling corrector and improver. I will speak to you in any language and you will detect the language, translate it and answer in the corrected and improved version of my text, in English. I want you to replace my simplified A0-level words and sentences with more beautiful and elegant, upper level English words and sentences. Keep the meaning same, but make them more scientific and academic. I want you to only reply the correction, the improvements and nothing else, do not write explanations. My sentences are as follows: `n",
-                "以下の文をビジネスライクな英語に翻訳してください。`n"]
+    prompts := ["以下の文を日本語に翻訳してください。",
+                "以下の英文を校正してください。意味を保ちながら知的で洗練された表現に見直してください。修正点は末尾に表としてまとめてください。",
+                "以下の文を知的で洗練された英語に翻訳してください。"]
     
     {
         Sleep 150
