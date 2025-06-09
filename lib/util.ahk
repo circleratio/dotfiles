@@ -208,9 +208,9 @@ global
 ;
 ::]p::
 {
-    prompts := ["以下の文を日本語に翻訳してください。",
-                "以下の英文を校正してください。意味を保ちながら知的で洗練された表現に見直してください。修正点は末尾に表としてまとめてください。",
-                "以下の文を知的で洗練された英語に翻訳してください。"]
+    prompts := ["以下の文を日本語に翻訳してください。`n【文章】`n",
+                "以下の英文を校正してください。意味を保ちながら知的で洗練された表現に見直してください。修正点は末尾に表としてまとめてください。`n【英文】`n",
+                "以下の文を知的で洗練された英語に翻訳してください。`n【文章】`n"]
     
     {
         Sleep 150
@@ -238,11 +238,11 @@ global
         text_cb := A_Clipboard
     
         Sleep(150)
-        A_Clipboard := prompts[Selection]
+        A_Clipboard := prompts[Selection] . text_cb
         Send("+{INSERT}")
+
         Sleep(150)
-        A_Clipboard := text_cb
-        Send("+{INSERT}") 
+        A_Clipboard := text_cb 
     }
 }
 
