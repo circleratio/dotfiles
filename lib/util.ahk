@@ -14,11 +14,11 @@ A_MaxHotkeysPerInterval := 200
 !k::Up
 !l::Right
 
-;; Home/End/PgDn/PgUpをvi風カーソル移動の下段に配置
+;; Home/PgDn/PgUp/Endをvi風カーソル移動の下段に配置
 !n::Home
-!m::End
-!,::PgDn
-!.::PgUp
+!m::PgDn
+!,::PgUp
+!.::End
 
 ;; Ctrl-o で半角/全角
 ^o::SC029
