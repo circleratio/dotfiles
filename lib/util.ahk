@@ -204,6 +204,21 @@ global
 }
 
 ;
+; 環境変数EMAILの内容(ユーザのメールアドレスを想定)を挿入する。
+;
+::]m::
+{
+    bk := A_Clipboard
+    Sleep(150)
+    
+    A_Clipboard := EnvGet("EMAIL")
+    Send("+{INSERT}")
+    Sleep(150)
+    
+    A_Clipboard := bk
+}
+
+;
 ; 生成AIのプロンプトの入力支援。クリップボードの内容に、プロンプトを付加してペーストする
 ;
 ::]p::
