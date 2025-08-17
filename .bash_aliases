@@ -43,7 +43,6 @@ alias mr='mpg123 -z'
 alias ncd='cd "`ls -td */ | head -1`"'
 alias o='onedrive --synchronize'
 alias p='python'
-alias plan=tt_plan
 # q
 # r
 alias s='[[ -v STY ]] || screen -R'
