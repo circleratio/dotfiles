@@ -1,0 +1,30 @@
+#!/usr/bin/bash
+
+case "$1" in
+    "a")
+        curl "http://wttr.in/aichi,Japan";;
+    "e")
+        curl "http://wttr.in/ehime,Japan";;
+    "f")
+        curl "http://wttr.in/fukuoka,Japan";;
+    "g")
+        curl "http://wttr.in/gifu,Japan";;
+    "h")
+        curl "http://wttr.in/hokkaido,Japan";;
+    "i")
+        curl "http://wttr.in/ibaraki,Japan";;
+    "k")
+        curl "http://wttr.in/kumamoto,Japan";;
+    "m")
+        curl "http://wttr.in/mie,Japan";;
+    "n")
+        curl "http://wttr.in/nagano,Japan";;
+    "o")
+        curl "http://wttr.in/okayama,Japan";;
+    "s")
+        curl "http://wttr.in/shizuoka,Japan";;
+    "t")
+        curl "http://wttr.in/tokyo,Japan";;
+    *)
+        curl "http://wttr.in/aichi,Japan";;
+esac
