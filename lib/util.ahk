@@ -14,11 +14,11 @@ A_MaxHotkeysPerInterval := 200
 !k::Up
 !l::Right
 
-;; Home/PgDn/PgUp/Endをvi風カーソル移動の下段に配置
+;; Home/End/PgDn/PgUpをvi風カーソル移動の下段に配置
 !n::Home
-!m::PgDn
-!,::PgUp
-!.::End
+!m::End
+!,::PgDn
+!.::PgUp
 
 ;; Ctrl-o で半角/全角
 ^o::SC029
@@ -26,6 +26,20 @@ A_MaxHotkeysPerInterval := 200
 ;; Alt-o/p でIMEのON/OFF
 !o::IME_SET(1)
 !p::IME_SET(0)
+
+;
+; 数字を常に半角で入力(○付数字が入力できなくなるので注意)
+;
+1::Send "{U+0031}"
+2::Send "{U+0032}"
+3::Send "{U+0033}"
+4::Send "{U+0034}"
+5::Send "{U+0035}"
+6::Send "{U+0036}"
+7::Send "{U+0037}"
+8::Send "{U+0038}"
+9::Send "{U+0039}"
+0::Send "{U+0030}"
 
 ;
 ; MS365、メモ帳、ウェブブラウザでEmacs風キーバインドを設定。
@@ -201,21 +215,6 @@ global
         Sleep(150)
         Send("+{INSERT}")
     }
-}
-
-;
-; 環境変数EMAILの内容(ユーザのメールアドレスを想定)を挿入する。
-;
-::]m::
-{
-    bk := A_Clipboard
-    Sleep(150)
-    
-    A_Clipboard := EnvGet("EMAIL")
-    Send("+{INSERT}")
-    Sleep(150)
-    
-    A_Clipboard := bk
 }
 
 ;
