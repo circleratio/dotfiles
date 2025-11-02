@@ -57,6 +57,20 @@ A_MaxHotkeysPerInterval := 200
 ^i::Send "{Tab}"
 ^o::Send "{vkF3sc029}" ; 半角/全角
 
+;
+; 共通関数
+;
+paste_clipboard(text, wait_time) {
+    backup := A_Clipboard
+    Sleep(wait_time)
+    
+    A_Clipboard := text
+    Send("+{INSERT}")
+    Sleep(wait_time)
+    
+    A_Clipboard := backup
+}
+
 ^k::
 {
     Send "{ShiftDown}{End}{ShiftUp}"
@@ -87,7 +101,7 @@ ${::SendInput "{{}{}}{Left}"
 ;
 ; 日付を入力("yymmdd"形式)
 ;
-^1::
+^6::
 {
     TimeString := FormatTime(,"yyMMdd")
     A_Clipboard := TimeString
@@ -97,7 +111,7 @@ ${::SendInput "{{}{}}{Left}"
 ;
 ; 日付を入力("月/日(曜日) 時:分"形式)
 ;
-^2::
+^7::
 {
     TimeString1 := FormatTime(,"M/d")
     TimeString2 := FormatTime(," HH:mm")
@@ -118,7 +132,7 @@ get_dowstr(theNum)
 ;
 ; 任意の名前で空ファイルを作る(エクスプローラ上で動作)
 ;
-^3::
+^8::
 {
     {
         If (!WinActive("ahk_class CabinetWClass"))
@@ -182,9 +196,11 @@ global
 }
 
 ;
-; ダイアログで日付を入力し、"M/d(Wday)"形式で入力
+; ホットストリング
 ;
-::]d::
+
+; ダイアログで日付を入力し、"M/d(Wday)"形式で入力
+:*:d//::
 {
     {
         Sleep 150
@@ -217,10 +233,14 @@ global
     }
 }
 
-;
+; 環境変数EMAILの内容(ユーザのメールアドレスを想定)を挿入する。
+:*:m//::
+{
+    paste_clipboard(EnvGet("EMAIL"), 150)
+}
+
 ; 生成AIのプロンプトの入力支援。クリップボードの内容に、プロンプトを付加してペーストする
-;
-::]p::
+:*:p//::
 {
     prompts := ["以下の文を日本語に翻訳してください。`n【文章】`n",
                 "以下の英文を校正してください。意味を保ちながら知的で洗練された表現に見直してください。修正点は末尾に表としてまとめてください。`n【英文】`n",
