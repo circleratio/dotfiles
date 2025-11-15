@@ -13,7 +13,9 @@ import calendar
 class Plan:
     def __init__(self, path):
         self.plan = self.get_plan(path)
-        self.dow_map = {
+
+    def get_plan(self, path):
+        dow_map = {
             'mon': 0,
             'tue': 1,
             'wed': 2,
@@ -23,7 +25,6 @@ class Plan:
             'sun': 6,
         }
 
-    def get_plan(self, path):
         result = []
         with open(path) as f:
             items = f.readlines()
@@ -33,12 +34,19 @@ class Plan:
                     t = m.group(1)
                     if t == 'm':
                         date = self.parse_month(m.group(2))
+
                     elif t == 'w':
-                        date = m.group(2)
+                        dow = datetime.datetime.today().weekday()
+                        offset_this_week = 7 - dow
+                        offset_next_week = dow_map[m.group(2)]
+                        offset = offset_this_week + offset_next_week
+                        date = datetime.datetime.now() + datetime.timedelta(days=offset)
+                        date = date.date()
                     elif t == 'd':
                         date = self.parse_day(m.group(2))
                     else:
-                        date = m.group(2)
+                        date = datetime.datetime.strptime(m.group(2), '%Y/%m/%d')
+                        date = date.date()
                     
                     js = {
                         'type': t,
@@ -72,7 +80,7 @@ class Plan:
             dt_from = datetime.datetime.now()
             
         if dt_to == None:
-            dt_to = dt_from()
+            dt_to = dt_from
             
         date_from = dt_from.date()
         date_to = dt_to.date()
@@ -82,7 +90,7 @@ class Plan:
                 dt = dt_from
                 while dt <= dt_to:
                     day_of_week = dt.weekday()
-                    if day_of_week == self.dow_map[p['date']]:
+                    if day_of_week == p['date'].weekday():
                         js = {
                             'type': p['type'],
                             'date': dt.date(),
