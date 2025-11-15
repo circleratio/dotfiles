@@ -27,7 +27,7 @@ apt install \
   gnupg ca-certificates \
   curl wget w3m \
   fetchmail procmail neomutt \
-  rsync
+  rsync dnsutils
 
 # documentation
 apt install \
