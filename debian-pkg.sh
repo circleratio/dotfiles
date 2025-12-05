@@ -14,8 +14,15 @@ apt install \
 # development
 apt install \
   git \
-  python3 \
   shellcheck
+ 
+apt install \
+  python3 \
+  python3-numpy \
+  python3-reportlab \
+  python3-bs4 \
+  python3-feedparser \
+  python3-django
 
 # media
 apt install \
