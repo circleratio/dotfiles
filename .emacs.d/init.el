@@ -6,37 +6,22 @@
       (load-file proxy-settings)))
 
 (eval-and-compile
-  (when (or load-file-name byte-compile-current-file)
-    (setq user-emacs-directory
-          (expand-file-name
-           (file-name-directory (or load-file-name byte-compile-current-file))))))
-
-(eval-and-compile
   (customize-set-variable
-   'package-archives '(("gnu"   . "https://elpa.gnu.org/packages/")
-                       ("melpa" . "https://melpa.org/packages/")
-                       ("org"   . "https://orgmode.org/elpa/")))
+   'package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
+                       ("melpa" . "https://melpa.org/packages/")))
   (package-initialize)
-  (unless (package-installed-p 'leaf)
-    (package-refresh-contents)
-    (package-install 'leaf))
+  (use-package leaf :ensure t)
 
   (leaf leaf-keywords
     :ensure t
     :init
-    (leaf hydra :ensure t)
-    (leaf el-get :ensure t)
     (leaf blackout :ensure t)
     :config
     (leaf-keywords-init)))
 
-(leaf leaf
-  :config
-  (leaf leaf-convert :ensure t)
-  (leaf leaf-tree
-    :ensure t
-    :custom ((imenu-list-size . 30)
-             (imenu-list-position . 'left))))
+(leaf leaf-convert
+  :doc "Convert many format to leaf format"
+  :ensure t)
 
 (leaf cus-edit
   :doc "tools for customizing Emacs and Lisp packages"
@@ -46,7 +31,8 @@
   :custom '(
             ;; overrides default settings
             (ring-bell-function . 'ignore)
-            (menu-bar-mode . nil)
+                                        ;(menu-bar-mode . nil)
+            (menu-bar-mode . t)
             (tool-bar-mode . nil)
             (scroll-bar-mode . nil)
             (indent-tabs-mode . nil)
@@ -529,15 +515,16 @@ Uses `current-date-time-format' for the formatting the date/time."
       (load-file personal-settings)))
 
 (setq default-frame-alist
-      (append (list
-              '(font . "UDEV Gothic JPDOC-16"))
-              default-frame-alist))
+     (append (list
+             '(font . "UDEV Gothic JPDOC-16"))
+             default-frame-alist))
 (setq initial-frame-alist
-      (append (list
-               '(width . 80)
-               '(height . 31)
-               '(top . 4)
-               '(left . 1))))
+     (append (list
+              '(width . 80)
+              '(height . 31)
+              '(top . 4)
+              '(left . 1))))
+
 (cd "~")
 
 ;; Local Variables:
