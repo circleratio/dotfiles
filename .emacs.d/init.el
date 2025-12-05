@@ -416,6 +416,17 @@
     (progn (set-frame-parameter nil 'alpha 95)))
 
 ;; development
+(leaf eglot
+  :doc "The Emacs Client for LSP servers"
+  :hook ((clojure-mode-hook . eglot-ensure))
+  :custom ((eldoc-echo-area-use-multiline-p . nil)
+           (eglot-connect-timeout . 600)))
+
+(leaf eglot-booster
+  :when (executable-find "emacs-lsp-booster")
+  :vc ( :url "https://github.com/jdtsmith/eglot-booster")
+  :global-minor-mode t)
+
 (leaf markdown-preview-mode
   :custom ((markdown-command . "pandoc")
 	   (markdown-use-pandoc-style-yaml-metadata . t)
