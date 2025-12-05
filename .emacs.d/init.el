@@ -31,8 +31,7 @@
   :custom '(
             ;; overrides default settings
             (ring-bell-function . 'ignore)
-                                        ;(menu-bar-mode . nil)
-            (menu-bar-mode . t)
+            (menu-bar-mode . nil)
             (tool-bar-mode . nil)
             (scroll-bar-mode . nil)
             (indent-tabs-mode . nil)
