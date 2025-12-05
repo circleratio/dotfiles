@@ -208,6 +208,22 @@
            (global-company-mode           . t)
            (company-selection-wrap-around . t)))
 
+(leaf autorevert
+  :doc "revert buffers when files on disk change"
+  :global-minor-mode global-auto-revert-mode)
+
+(leaf simple
+  :doc "basic editing commands for Emacs"
+  :custom ((kill-read-only-ok . t)
+           (kill-whole-line . t)
+           (eval-expression-print-length . nil)
+           (eval-expression-print-level . nil)))
+
+(leaf savehist
+  :doc "Save minibuffer history"
+  :custom `((savehist-file . ,(locate-user-emacs-file "savehist")))
+  :global-minor-mode t)
+
 (leaf recentf
   :defun
   (recentf-save-list recentf-cleanup)
