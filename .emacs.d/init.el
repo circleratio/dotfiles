@@ -127,15 +127,58 @@
   (setq default-input-method "japanese-mozc"))
 
 ;; behaviors
-(leaf consult
-  :ensure t
-  :bind (("C-s" . consult-line)))
-
 (leaf vertico
-  :url "https://github.com/minad/vertico"
+  :doc "VERTical Interactive COmpletion"
   :ensure t
-  :init
-  (vertico-mode))
+  :global-minor-mode t)
+
+(leaf marginalia
+  :doc "Enrich existing commands with completion annotations"
+  :ensure t
+  :global-minor-mode t)
+
+(leaf consult
+  :doc "Consulting completing-read"
+  :ensure t
+  :hook (completion-list-mode-hook . consult-preview-at-point-mode)
+  :defun consult-line
+  :preface
+  (defun c/consult-line (&optional at-point)
+    "Consult-line uses things-at-point if set C-u prefix."
+    (interactive "P")
+    (if at-point
+        (consult-line (thing-at-point 'symbol))
+      (consult-line)))
+  :custom ((xref-show-xrefs-function . #'consult-xref)
+           (xref-show-definitions-function . #'consult-xref)
+           (consult-line-start-from-top . t))
+  :bind (;; C-c bindings (mode-specific-map)
+         ([remap switch-to-buffer] . consult-buffer) ; C-x b
+         ([remap project-switch-to-buffer] . consult-project-buffer) ; C-x p b
+
+         ;; M-g bindings (goto-map)
+         ([remap goto-line] . consult-goto-line)    ; M-g g
+         ([remap imenu] . consult-imenu)            ; M-g i
+         ("M-g f" . consult-flymake)
+
+         ;; C-M-s bindings
+         ("C-s" . c/consult-line)       ; isearch-forward
+         ("C-M-s" . nil)                ; isearch-forward-regexp
+         ("C-M-s s" . isearch-forward)
+         ("C-M-s C-s" . isearch-forward-regexp)
+         ("C-M-s r" . consult-ripgrep)
+
+         (minibuffer-local-map
+          :package emacs
+          ("C-r" . consult-history))))
+
+(leaf affe
+  :doc "Asynchronous Fuzzy Finder for Emacs"
+  :ensure t
+  :custom ((affe-highlight-function . 'orderless-highlight-matches)
+           (affe-regexp-function . 'orderless-pattern-compiler))
+  :bind (("C-M-s r" . affe-grep)
+         ("C-M-s f" . affe-find)))
 
 (leaf orderless
   :ensure t
@@ -143,6 +186,38 @@
   (setq completion-styles '(orderless)
         completion-category-defaults nil
         completion-category-overrides '((file (styles partial-completion)))))
+
+(leaf orderless
+  :doc "Completion style for matching regexps in any order"
+  :ensure t
+  :custom ((completion-styles . '(orderless))
+           (completion-category-defaults . nil)
+           (completion-category-overrides . '((file (styles partial-completion))))))
+
+(leaf embark-consult
+  :doc "Consult integration for Embark"
+  :ensure t
+  :bind ((minibuffer-mode-map
+          :package emacs
+          ("M-." . embark-dwim)
+          ("C-." . embark-act))))
+
+(leaf corfu
+  :doc "COmpletion in Region FUnction"
+  :ensure t
+  :global-minor-mode global-corfu-mode corfu-popupinfo-mode
+  :custom ((corfu-auto . t)
+           (corfu-auto-delay . 0)
+           (corfu-auto-prefix . 1)
+           (corfu-popupinfo-delay . nil)) ; manual
+  :bind ((corfu-map
+          ("C-s" . corfu-insert-separator))))
+
+(leaf cape
+  :doc "Completion At Point Extensions"
+  :ensure t
+  :config
+  (add-to-list 'completion-at-point-functions #'cape-file))
 
 (leaf *completion ;; extentions ignored on completion
   :init
