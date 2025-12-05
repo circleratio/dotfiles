@@ -50,6 +50,12 @@
             (tool-bar-mode . nil)
             (scroll-bar-mode . nil)
             (indent-tabs-mode . nil)
+            (create-lockfiles . nil)
+            (tab-width . 4)
+            (history-length . 1000)
+            (history-delete-duplicates . t)
+            (ring-bell-function . 'ignore)
+            ; (truncate-lines . t) ; 長い行を切り詰めて表示
             ;; settings not in the default
             (compilation-scroll-output . t)
             (make-backup-files . nil)
