@@ -2,5 +2,9 @@
 # name: class
 # key: class
 # --
-def ${1:name}(${2:arg}):
-    $0
+class ${1:name}:
+    def __init__(self, ${2:arg}):
+        $0
+
+    def __del__(self):
+        pass
