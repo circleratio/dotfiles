@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: match
+# key: match
+# --
+m = re.match('${1:regex}', ${2:str})
+if m:
+    $0

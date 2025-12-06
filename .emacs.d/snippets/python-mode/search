@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: search
+# key: search
+# --
+m = re.search('${1:regex}', ${2:str})
+if m:
+    $0
