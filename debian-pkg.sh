@@ -18,11 +18,14 @@ apt install \
  
 apt install \
   python3 \
-  python3-numpy \
-  python3-reportlab \
+  python3-bottle \
   python3-bs4 \
   python3-feedparser \
-  python3-django
+  python3-isort \
+  python3-jinja2 \
+  python3-numpy \
+  python3-reportlab \
+  python3-venv
 
 # media
 apt install \
