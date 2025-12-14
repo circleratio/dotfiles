@@ -8,28 +8,30 @@ import json
 
 def get_isbn_info_by_google(isbn):
     base_url = "https://www.googleapis.com/books/v1/volumes?q=isbn"
+    books = []
 
     url = f"{base_url}:{isbn}"
     r = requests.get(url)
     values = json.loads(r.text)
 
-    res = values["items"][0]["volumeInfo"]
+    for i in values["items"]:
+        v = i["volumeInfo"]
 
-    title = res["title"]
-    authors = res["authors"]
-    author = ",".join(authors)
-    ids = res["industryIdentifiers"]
-    isbn_10 = ""
-    isbn_13 = ""
-    for i in ids:
-        if i["type"] == "ISBN_10":
-            isbn_10 = i["identifier"]
-        if i["type"] == "ISBN_13":
-            isbn_13 = i["identifier"]
+        title = v["title"]
+        authors = v["authors"]
+        author = ",".join(authors)
+        iis = v["industryIdentifiers"]
+        isbn_10 = ""
+        isbn_13 = ""
+        for isbn in iis:
+            if isbn["type"] == "ISBN_10":
+                isbn_10 = isbn["identifier"]
+            if isbn["type"] == "ISBN_13":
+                isbn_13 = isbn["identifier"]
 
-    res = {"title": title, "author": author, "isbn_10": isbn_10, "isbn_13": isbn_13}
+        books.append({"title": title, "author": author, "isbn_10": isbn_10, "isbn_13": isbn_13})
 
-    return res
+    return books
 
 
 def get_isbn_info(isbn):
@@ -55,8 +57,9 @@ def main():
         print("Error: the length of ISBN must be 10 or 13. Aborted")
         exit(1)
 
-    res = get_isbn_info(isbn)
-    print(md_format(res, True))
+    books = get_isbn_info(isbn)
+    for b in books:
+        print(md_format(b, True))
 
 
 if __name__ == "__main__":
