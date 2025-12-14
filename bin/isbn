@@ -1,0 +1,63 @@
+#!/usr/bin/python3
+# -*- coding:utf-8 -*-
+
+import sys
+import requests
+import json
+
+
+def get_isbn_info_by_google(isbn):
+    base_url = "https://www.googleapis.com/books/v1/volumes?q=isbn"
+
+    url = f"{base_url}:{isbn}"
+    r = requests.get(url)
+    values = json.loads(r.text)
+
+    res = values["items"][0]["volumeInfo"]
+
+    title = res["title"]
+    authors = res["authors"]
+    author = ",".join(authors)
+    ids = res["industryIdentifiers"]
+    isbn_10 = ""
+    isbn_13 = ""
+    for i in ids:
+        if i["type"] == "ISBN_10":
+            isbn_10 = i["identifier"]
+        if i["type"] == "ISBN_13":
+            isbn_13 = i["identifier"]
+
+    res = {"title": title, "author": author, "isbn_10": isbn_10, "isbn_13": isbn_13}
+
+    return res
+
+
+def get_isbn_info(isbn):
+    res = get_isbn_info_by_google(isbn)
+    return res
+
+
+def md_format(res, quote):
+    text = "[{}({})]({})".format(res["title"], res["author"], res["isbn_10"])
+    if quote:
+        text = f"「{text}」"
+    return text
+
+
+def main():
+    if len(sys.argv) != 2:
+        print("Usage: isbn [10 or 13 digit ISBN number]")
+        exit(1)
+
+    isbn = sys.argv[1]
+
+    if len(isbn) != 10 and len(isbn) != 13:
+        print("Error: the length of ISBN must be 10 or 13. Aborted")
+        exit(1)
+
+    res = get_isbn_info(isbn)
+    print(md_format(res, True))
+
+
+if __name__ == "__main__":
+    main()
