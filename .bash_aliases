@@ -28,7 +28,9 @@ alias i='curl ipinfo.io/ip ; echo'
 alias l=ls
 alias la='ls -la'
 alias ll='ls -l'
+alias lla='ls -la'
 alias ltr='ls -ltr'
+alias lltr='ls -ltr'
 alias ls='ls -F --color=auto --show-control-chars'
 alias lt='ls --full-time --time-style="+%Y-%m-%d %H:%M:%S" $1 | grep $(date "+%F")'
 alias le=less
