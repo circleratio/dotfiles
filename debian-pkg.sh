@@ -25,6 +25,7 @@ apt install \
   python3-jinja2 \
   python3-numpy \
   python3-reportlab \
+  python3-dateutil \
   python3-venv
 
 # media
