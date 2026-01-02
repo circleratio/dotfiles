@@ -434,6 +434,19 @@
   :config
   (provide 'markdown-config))
 
+(leaf autoinsert
+  :require t
+  :doc "Insert templates into new files"
+  :tag "builtin"
+  :hook
+  (find-file-hooks . auto-insert)
+  :custom
+  (auto-insert-directory . "~/.emacs.d/auto-insert/")
+  :config
+  (setq auto-insert-alist
+        (append '(("\\.py" . "template.py")
+                  ("\\.sh" . "template.sh")) auto-insert-alist)))
+
 (leaf *grep-mode
   :custom ((grep-command . "grep -nH ")))
 
