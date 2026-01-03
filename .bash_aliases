@@ -1,10 +1,13 @@
 alias apt='sudo apt'
 # b is used for pomera 'battery' command
+alias bl='bash loop'
 # c is used for a shell function
 alias c-='cd -'
+# d
 alias djr='python3 manage.py runserver'
 alias djmm='python3 manage.py makemigrations'
 alias djm='python3 manage.py migrate'
+# e
 alias e=emacs
 alias ef='emacs "$(fzf)"'
 alias f=fzf-rg
@@ -43,17 +46,20 @@ alias mf='mplayer -af volnorm $(fzf)'
 alias mr='mpg123 -z'
 # n
 alias ncd='cd "`ls -td */ | head -1`"'
+# o
 alias o='onedrive --synchronize'
 alias p='python'
 # q
 # r
 alias s='[[ -v STY ]] || screen -R'
+alias sr='[[ -v STY ]] || screen -r'
 alias sl='ls -F --color=auto --show-control-chars'
 # t
 alias u='cd ..'
+# v
 alias v=vim
+alias vi=vim
 alias vf='vim "$(fzf)"'
-alias vf.='`find . -type f | fzf`'
 alias w=weather
 alias wget='wget -c'
 # x is used for explorer
