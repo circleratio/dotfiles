@@ -1,6 +1,6 @@
 alias apt='sudo apt'
 # b is used for pomera 'battery' command
-alias bl='bash loop'
+alias bl='bash loop.sh'
 # c is used for a shell function
 alias c-='cd -'
 # d
