@@ -26,6 +26,10 @@ if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 
+if [ -f ~/.bash_keys
+    . ~/.bash_keys
+fi
+
 function add_path() {
     if [ -d "$1" ]; then
         PATH=${PATH}:"$1"
