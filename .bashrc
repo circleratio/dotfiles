@@ -26,7 +26,7 @@ if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 
-if [ -f ~/.bash_keys
+if [ -f ~/.bash_keys ]; then
     . ~/.bash_keys
 fi
 
