@@ -40,8 +40,6 @@
             (history-length . 1000)
             (history-delete-duplicates . t)
             (ring-bell-function . 'ignore)
-            ; (truncate-lines . t) ; 長い行を切り詰めて表示
-            ;; settings not in the default
             (compilation-scroll-output . t)
             (make-backup-files . nil)
             (auto-save-default . nil)
@@ -59,7 +57,9 @@
    (inhibit-startup-echo-area--message . t)
    (initial-scratch-message . "")))
 
+;;
 ;; Japanese environment
+;;
 (leaf character-code
   :config
   (set-language-environment "Japanese")
@@ -111,7 +111,9 @@
     :bind (("C-o" . toggle-input-method)))
   (setq default-input-method "japanese-mozc"))
 
+;;
 ;; behaviors
+;;
 (leaf vertico
   :doc "VERTical Interactive COmpletion"
   :ensure t
@@ -324,8 +326,8 @@
                                  "bookmarks"
                                  ))))
 
-;; remove an empty file when saved
 (leaf *delete-file-if-no-contents
+  :doc "Remove an empty file when saved"
   :preface
   (defun my:delete-file-if-no-contents ()
     (when (and (buffer-file-name (current-buffer))
@@ -336,11 +338,16 @@
   (after-save-hook . my:delete-file-if-no-contents))
 
 (leaf-keys (("C-h" . delete-backward-char)
-            ("C-c ;" . recentf-open-files)
+            ("C-c d" . insert-current-date-time)
+            ("C-c e" . eval-region-string)
             ("C-c r" . replace-string)
+            ("C-c #" . comment-or-uncomment-region)
+            ("C-c ;" . recentf-open-files)
             ("C-c M-r" . replace-regexp)))
 
+;;
 ;; appearance
+;;
 (leaf tab-bar-mode
   :init
   (defvar my:ctrl-z-map (make-sparse-keymap)
@@ -415,7 +422,9 @@
 (if window-system
     (progn (set-frame-parameter nil 'alpha 95)))
 
-;; development
+;;
+;; development support
+;;
 (leaf eglot
   :doc "The Emacs Client for LSP servers"
   :hook ((clojure-mode-hook . eglot-ensure))
@@ -516,7 +525,6 @@
                                              (apply orig-fun args))
                                    '((depth . 99))))))
       
-;; [Windows] launch explorer
 (defun explorer-invoke()
   "Invoke Explorer on Windows systems"
   (interactive)
@@ -534,8 +542,6 @@ Uses `current-date-time-format' for the formatting the date/time."
   (insert (format-time-string current-date-time-format (current-time)))
   (insert "\n"))
 
-(global-set-key "\C-cd" 'insert-current-date-time)
-
 (defun eval-region-string (beg end)
   "Evaluate the S-expression written as a string in the region and insert the result."
   (interactive "r")
@@ -549,9 +555,6 @@ Uses `current-date-time-format' for the formatting the date/time."
              (setq evaluated-result region-string)))
     (delete-region beg end)
     (insert (format "%s" evaluated-result))))
-
-(global-set-key "\C-ce" 'eval-region-string)
-
 
 (setq search-engine-alist
       '(("Google" . "https://www.google.com/search?q=")
@@ -567,14 +570,13 @@ Uses `current-date-time-format' for the formatting the date/time."
          (url (concat (cdr (assoc choice search-engine-alist)) (url-hexify-string search-term))))
     (browse-url url)))
 
-;; comment out/in region
-(global-set-key (kbd "C-c #") 'comment-or-uncomment-region)
-
 ;; exec chmod +x when a file begins with '#!'
 (add-hook 'after-save-hook
           'executable-make-buffer-file-executable-if-script-p)
 
+;;
 ;; Personal customization
+;;
 (add-to-list 'load-path "~/.emacs.d/site-lisp")
 
 (require 'dnd)
