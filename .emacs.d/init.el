@@ -474,6 +474,25 @@
 (leaf powershell :ensure t)
 (leaf markdown-mode :ensure t)
 
+(leaf gptel
+  :ensure t
+  :config
+  :defvar ((gptel-model)
+           (gptel-backend))
+  ;; Gemini
+  :setq ((gptel-model quote gemini-2.5-flash))
+  :config
+  (setq gptel-backend (gptel-make-gemini "Gemini"
+                        :key (getenv "API_KEY_GEMINI")
+                        :stream t))
+  ;; Perplexity
+  ;; :setq ((gptel-model quote sonar))
+  ;; :config
+  ;; (setq gptel-backend (gptel-make-perplexity "Perplexity"
+  ;;                      :key (getenv "API_KEY_PERPLEXITY")
+  ;;                      :stream t))      
+  )
+
 (provide 'init)
 
 ;;
@@ -505,7 +524,6 @@
       (shell-command "explorer ."))
   (message "This OS is %s. This function works on on Windows " system-type))
 
-;; Insert current date and time into the current buffer
 (defvar current-date-time-format "%Y-%m-%d %H:%M:%S"
   "Format of date to insert with `insert-current-date-time' func. See help of `format-time-string' for possible replacements")
 
@@ -517,6 +535,40 @@ Uses `current-date-time-format' for the formatting the date/time."
   (insert "\n"))
 
 (global-set-key "\C-cd" 'insert-current-date-time)
+
+(defun eval-region-string (beg end)
+  "Evaluate the S-expression written as a string in the region and insert the result."
+  (interactive "r")
+  (let ((region-string (buffer-substring-no-properties beg end))
+        (evaluated-result nil))
+    (condition-case err
+        (progn
+          (let ((s-exp (read region-string)))
+            (setq evaluated-result (eval s-exp))))
+      (error (message "Error evaluating S-expression: %s" err)
+             (setq evaluated-result region-string)))
+    (delete-region beg end)
+    (insert (format "%s" evaluated-result))))
+
+(global-set-key "\C-ce" 'eval-region-string)
+
+
+(setq search-engine-alist
+      '(("Google" . "https://www.google.com/search?q=")
+        ("Weblio" . "https://www.weblio.jp/content/")))
+
+(defun search-region (beginning end)
+  "Search the contents of the region using a search engine."
+  (interactive "r")
+  (let* ((options (mapcar #'car search-engine-alist))
+         (prompt "Select a seach engine: ")
+         (choice (completing-read prompt options nil t))
+         (search-term (buffer-substring beginning end))
+         (url (concat (cdr (assoc choice search-engine-alist)) (url-hexify-string search-term))))
+    (browse-url url)))
+
+;; comment out/in region
+(global-set-key (kbd "C-c #") 'comment-or-uncomment-region)
 
 ;; exec chmod +x when a file begins with '#!'
 (add-hook 'after-save-hook
