@@ -1,4 +1,6 @@
-;;; init.el --- init.el  -*- lexical-binding: t; -*-
+;;
+;; init.el
+;; -*- coding: utf-8; lexical-binding: t -*-
 
 ;; kick out proxy settings to remove dependency on an environment 
 (let ((proxy-settings "~/.emacs.d/url-proxy-services.el"))
