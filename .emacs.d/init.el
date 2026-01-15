@@ -113,6 +113,20 @@
     :bind (("C-o" . toggle-input-method)))
   (setq default-input-method "japanese-mozc"))
 
+(leaf migemo
+  :doc "Japanese incremental search through romanized text"
+  :ensure t
+  :require t
+  :custom
+  ((migemo-command . "cmigemo")
+   (migemo-options . '("-q" "--emacs"))
+   (migemo-dictionary . "/usr/share/cmigemo/utf-8/migemo-dict")
+   (migemo-user-dictionary . nil)
+   (migemo-regex-dictionary . nil)
+   (migemo-coding-system . 'utf-8-unix))
+  :config
+  (migemo-init))
+
 ;;
 ;; behaviors
 ;;
@@ -349,7 +363,8 @@
             ("C-c r" . replace-string)
             ("C-c #" . comment-or-uncomment-region)
             ("C-c ;" . recentf-open-files)
-            ("C-c M-r" . replace-regexp)))
+            ("C-c M-r" . replace-regexp)
+            ("M-s" . isearch-forward)))
 
 ;;
 ;; appearance
@@ -398,7 +413,7 @@
          ("C-)" . puni-slurp-forward)
          ("C-}" . puni-barf-forward)
          ("M-(" . puni-wrap-round)
-         ("M-s" . puni-splice)
+         ;;("M-s" . puni-splice)
          ("M-r" . puni-raise)
          ("M-U" . puni-splice-killing-backward)
          ("M-z" . puni-squeeze))
