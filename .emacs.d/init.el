@@ -169,6 +169,10 @@
   :bind (("C-M-s r" . affe-grep)
          ("C-M-s f" . affe-find)))
 
+(leaf avy
+  :ensure t
+  :bind (("C-;" . avy-goto-char-timer)))
+
 (leaf orderless
   :ensure t
   :init
