@@ -120,11 +120,14 @@
   :custom
   ((migemo-command . "cmigemo")
    (migemo-options . '("-q" "--emacs"))
-   (migemo-dictionary . "/usr/share/cmigemo/utf-8/migemo-dict")
    (migemo-user-dictionary . nil)
    (migemo-regex-dictionary . nil)
    (migemo-coding-system . 'utf-8-unix))
   :config
+  (setq migemo-dictionary
+        (cond ((eq system-type 'windows-nt)
+               (concat (file-name-directory (executable-find "cmigemo")) "dict/utf-8/migemo-dict"))
+              ((eq system-type 'gnu/linux)  "/usr/share/cmigemo/utf-8/migemo-dict")))
   (migemo-init))
 
 ;;
