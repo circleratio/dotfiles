@@ -389,15 +389,8 @@
   :doc "Parentheses Universalistic"
   :ensure t
   :global-minor-mode puni-global-mode
-  :bind (puni-mode-map
-         ;; default mapping
-         ;; ("C-M-f" . puni-forward-sexp)
-         ;; ("C-M-b" . puni-backward-sexp)
-         ;; ("C-M-a" . puni-beginning-of-sexp)
-         ;; ("C-M-e" . puni-end-of-sexp)
-         ;; ("M-)" . puni-syntactic-forward-punct)
-         ;; ("C-M-u" . backward-up-list)
-         ;; ("C-M-d" . backward-down-list)
+  :bind (("C-c i" . puni-mark-list-around-point)
+         ("C-c j" . puni-expand-region)
          ("C-)" . puni-slurp-forward)
          ("C-}" . puni-barf-forward)
          ("M-(" . puni-wrap-round)
