@@ -1,0 +1,6 @@
+#!/usr/bin/bash
+# -*- coding: utf-8 -*-
+
+for i in $@; do
+    python getp.py $i
+done
