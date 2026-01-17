@@ -54,6 +54,8 @@ alias s='[[ -v STY ]] || screen -R'
 alias sr='[[ -v STY ]] || screen -r'
 alias sl='ls -F --color=auto --show-control-chars'
 # t
+alias t=train.py
+# u
 alias u='cd ..'
 # v
 alias v=vim
