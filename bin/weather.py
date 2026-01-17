@@ -11,10 +11,11 @@ locations = [
 ]
 
 base_url = "https://www.jma.go.jp/bosai/forecast/data/forecast/{}.json"
+human_url = "https://www.jma.go.jp/bosai/forecast/#area_type=offices&area_code={}"
 
-
-def print_day_info(location, day_info):
+def print_day_info(location, day_info, code):
     print(f"# {location}")
+    print(human_url.format(code))
     for di in day_info:
         if not di:
             continue
@@ -101,7 +102,7 @@ def main():
 
     for location in locations:
         d = parse_info(location[1], location[2])
-        print_day_info(location[0], d)
+        print_day_info(location[0], d, location[1])
 
 
 if __name__ == "__main__":
