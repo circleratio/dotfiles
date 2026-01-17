@@ -59,7 +59,7 @@ alias u='cd ..'
 alias v=vim
 alias vi=vim
 alias vf='vim "$(fzf)"'
-alias w=weather
+alias w='weather.py'
 alias wget='wget -c'
 # x is used for explorer
 # y
