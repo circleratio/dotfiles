@@ -22,11 +22,13 @@ alias gpl='git pull'
 alias gr='git rm'
 alias gs='git status'
 alias grep='grep --color=auto'
+# h
 alias h=history
 # i
 alias i='curl ipinfo.io/ip ; echo'
 # j
 # k
+# l
 alias l=ls
 alias la='ls -la'
 alias ll='ls -l'
@@ -36,6 +38,7 @@ alias lltr='ls -ltr'
 alias ls='ls -F --color=auto --show-control-chars'
 alias lt='ls --full-time --time-style="+%Y-%m-%d %H:%M:%S" $1 | grep $(date "+%F")'
 alias le=less
+# m
 alias m=neomutt
 alias md=mkdir
 alias mo=batcat
@@ -45,6 +48,7 @@ alias mf='mplayer -af volnorm $(fzf)'
 alias mr='mpg123 -z'
 # n
 alias ncd='cd "`ls -td */ | head -1`"'
+alias news=newsboat
 # o
 alias o='onedrive --synchronize'
 alias p='python'
