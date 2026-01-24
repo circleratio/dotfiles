@@ -1,5 +1,9 @@
 alias apt='sudo apt'
+alias aud='sudo apt update'
+alias aug='sudo apt upgrade'
+alias ai='sudo apt install'
 # b is used for pomera 'battery' command
+alias b='newbooks.py | less'
 # c is used for a shell function
 alias c-='cd -'
 # d
@@ -48,6 +52,8 @@ alias news=newsboat
 # o
 alias o='onedrive --synchronize'
 alias p='python'
+# p
+alias path='echo $PATH | tr ":" "\n" | sort'
 # q
 # r
 alias s='[[ -v STY ]] || screen -R'
