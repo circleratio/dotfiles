@@ -3,9 +3,6 @@ alias apt='sudo apt'
 # c is used for a shell function
 alias c-='cd -'
 # d
-alias djr='python3 manage.py runserver'
-alias djmm='python3 manage.py makemigrations'
-alias djm='python3 manage.py migrate'
 # e
 alias e=emacs
 alias ef='emacs "$(fzf)"'
@@ -41,7 +38,6 @@ alias le=less
 # m
 alias m=neomutt
 alias md=mkdir
-alias mo=batcat
 alias more=batcat
 alias mplayer='mplayer -af volnorm'
 alias mf='mplayer -af volnorm $(fzf)'
