@@ -1,7 +1,7 @@
-alias apt='sudo apt'
+alias a='sudo apt'
+alias ai='sudo apt install'
 alias aud='sudo apt update'
 alias aug='sudo apt upgrade'
-alias ai='sudo apt install'
 # b is used for pomera 'battery' command
 alias b='newbooks.py | less'
 # c is used for a shell function
@@ -11,6 +11,7 @@ alias c-='cd -'
 alias e=emacs
 alias ef='emacs "$(fzf)"'
 alias f=fzf-rg
+# g
 alias g=git
 alias ga='git add'
 alias gc='git commit'
@@ -55,7 +56,9 @@ alias p='python'
 # p
 alias path='echo $PATH | tr ":" "\n" | sort'
 # q
+alias q=qalc
 # r
+# s
 alias s='[[ -v STY ]] || screen -R'
 alias sr='[[ -v STY ]] || screen -r'
 alias sl='ls -F --color=auto --show-control-chars'
@@ -67,6 +70,7 @@ alias u='cd ..'
 alias v=vim
 alias vi=vim
 alias vf='vim "$(fzf)"'
+# w
 alias w='weather.py'
 alias wget='wget -c'
 # x is used for explorer
