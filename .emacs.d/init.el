@@ -361,6 +361,7 @@
   (after-save-hook . my:delete-file-if-no-contents))
 
 (leaf-keys (("C-h" . delete-backward-char)
+            ("C-c b" . describe-bindings)
             ("C-c d" . insert-current-date-time)
             ("C-c e" . eval-region-string)
             ("C-c r" . replace-string)
