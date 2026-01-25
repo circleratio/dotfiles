@@ -498,7 +498,10 @@
   (add-to-list 'company-backends 'company-jedi))
 
 (leaf powershell :ensure t)
-(leaf markdown-mode :ensure t)
+(leaf markdown-mode
+  :ensure t
+  :bind (markdown-mode-map
+         ("C-c C-i" . markdown-follow-thing-at-point)))
 
 (leaf gptel
   :ensure t
