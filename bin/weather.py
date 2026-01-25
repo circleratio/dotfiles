@@ -37,6 +37,9 @@ def print_day_info(location, day_info, code):
         else:
             di["pop18-24"] += "%"
 
+        if "weather" not in di:
+            di["weather"] = "-"
+
         pop_str = " ({}/{}/{}/{})".format(
             di["pop0-6"], di["pop6-12"], di["pop12-18"], di["pop18-24"]
         )
