@@ -3,7 +3,7 @@ alias ai='sudo apt install'
 alias aud='sudo apt update'
 alias aug='sudo apt upgrade'
 # b is used for pomera 'battery' command
-alias b='newbooks.py | less'
+alias b='newbooks.py -t'
 # c is used for a shell function
 alias c-='cd -'
 # d
