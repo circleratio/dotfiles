@@ -14,7 +14,7 @@ alias f=fzf-rg
 # g
 alias g=git
 alias ga='git add'
-alias gc='git commit'
+alias gc='git commit -m'
 alias gd='git difftool'
 alias gl='git log --oneline --decorate --graph --branches --tags --remotes --all'
 alias gm='git mv'
