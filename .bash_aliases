@@ -49,7 +49,7 @@ alias mf='mplayer -af volnorm $(fzf)'
 alias mr='mpg123 -z'
 # n
 alias ncd='cd "`ls -td */ | head -1`"'
-alias news=newsboat
+alias n=newsboat
 # o
 alias o='onedrive --synchronize'
 alias p='python'
