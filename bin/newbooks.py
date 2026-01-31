@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 # -*- coding:utf-8 -*-
+import argparse
 import feedparser
 import re
 from datetime import datetime
@@ -50,20 +51,32 @@ class Book:
         # print(self.tags)
         print(f"ISBN: {self.isbn}")
 
+    def print_title(self):
+        print(self.title)
+
 
 def main():
     book_list = []
+
+    parser = argparse.ArgumentParser(description="show new books from Hanmoto API")
+
+    parser.add_argument("-t", "--show_only_title", action="store_true")
+    args = parser.parse_args()
 
     feed = feedparser.parse(rss)
     for entry in feed.entries:
         book_list.append(Book(entry))
 
-    prev = False
-    for book in book_list:
-        if prev:
-            print("---")
-        book.print()
-        prev = True
+    if args.show_only_title:
+        for book in book_list:
+            book.print_title()
+    else:
+        prev = False
+        for book in book_list:
+            if prev:
+                print("---")
+            book.print()
+            prev = True
 
 
 if __name__ == "__main__":
