@@ -16,7 +16,7 @@ case $(uname -m) in
 esac
 
 export HISTCONTROL=ignoreboth:erasedups
-export HISTIGNORE='?:??:???:exit'
+export HISTIGNORE=$'&:ls:ll:la:ltr:ps:df:du:b:h:l:t:w:_'
 
 export EDITOR=vim
 
