@@ -25,7 +25,7 @@ alias gr='git rm'
 alias gs='git status'
 alias grep='grep --color=auto'
 # h
-alias h=history
+alias h='history | fzf'
 # i
 alias i='curl ipinfo.io/ip ; echo'
 # j
