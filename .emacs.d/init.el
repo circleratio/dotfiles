@@ -41,6 +41,7 @@
             (tab-width . 4)
             (history-length . 1000)
             (history-delete-duplicates . t)
+            (bidi-display-reordering . nil)
             (ring-bell-function . 'ignore)
             (compilation-scroll-output . t)
             (make-backup-files . nil)
