@@ -9,11 +9,6 @@ A_MaxHotkeysPerInterval := 200
 ; キー設定 (ホームポジションから手を動かさない設定)
 ;
 
-; CapsLock と Ctrl の入れ替え
-;*CapsLock::Send "{Blind}{CtrlDownR}"
-;*CapsLock up::Send "{Blind}{CtrlUp}"
-;*LCtrl::SetCapsLockState !GetKeyState("CapsLock", "T")
-
 ;; vi風カーソル移動
 !h::Left
 !j::Down
