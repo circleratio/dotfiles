@@ -52,9 +52,17 @@ alias ncd='cd "`ls -td */ | head -1`"'
 alias n=newsboat
 # o
 alias o='onedrive --synchronize'
-alias p='python'
 # p
+alias p='python'
 alias path='echo $PATH | tr ":" "\n" | sort'
+alias pi='podman images'
+alias pp='podman ps'
+alias pr='podman run'
+alias prm='podman rm'
+alias pst='podman start'
+alias psp='podman stop'
+alias ppp='podman pod ps'
+alias pprm='podman pod rm'
 # q
 alias q=qalc
 # r

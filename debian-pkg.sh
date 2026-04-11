@@ -15,6 +15,7 @@ apt install \
 # development
 apt install \
   git \
+  podman podman-compose \
   shellcheck
  
 apt install \
