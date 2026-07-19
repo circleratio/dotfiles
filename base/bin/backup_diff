@@ -1,0 +1,43 @@
+#!/usr/bin/bash
+
+BACKUP_DIR=${HOME}/tmp
+
+function get_unique_filename() {
+    i=0
+    RES=${BACKUP_SUBDIR}/$(basename $ORIG_FILE).$(date +%Y%m%d).${i}
+    while [ -e ${RES} ]; do
+        ((i=${i}+1))
+        RES=${BACKUP_SUBDIR}/$(basename $ORIG_FILE).$(date +%Y%m%d).${i}
+    done
+    echo $RES
+}
+
+function diff_backup() {
+    ORIG_FILE=$(realpath $1)
+    if [ ! -e ${ORIG_FILE} ]; then
+        echo "${ORIG_FILE} does not exist."
+        return
+    fi
+    
+    BASENAME=${ORIG_FILE%.*}
+    BACKUP_SUBDIR=${BACKUP_DIR}/$(basename $BASENAME)
+    
+    if [ ! -e ${BACKUP_SUBDIR} ]; then
+        mkdir -p ${BACKUP_SUBDIR}
+    fi
+    
+    BACKUP_FILE=${BACKUP_SUBDIR}/$(basename $ORIG_FILE).backup
+    DIFF_FILE=$(get_unique_filename ${BACKUP_SUBDIR}/$(basename $ORIG_FILE))
+    
+    if diff ${BACKUP_FILE} ${ORIG_FILE} > /dev/null; then
+        echo "No diff found."
+    else
+        diff ${BACKUP_FILE} ${ORIG_FILE} > ${DIFF_FILE}
+    fi
+    
+    cp -f ${ORIG_FILE} ${BACKUP_FILE}
+}
+
+for arg; do
+    diff_backup $arg
+done

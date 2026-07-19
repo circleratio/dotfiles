@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+# -*- coding: utf-8 -*-
+
+CONFIG_FILE=~/.ntfy
+
+if [ $# -ne 1 ];then
+    echo "Usage: $0 message";
+    exit 1
+fi
+
+if [ -f "$CONFIG_FILE" ]; then
+    NOTIFICATION_ID=$(< "$CONFIG_FILE")
+else
+    echo You need setup ~/.ntfy file to specify message id.
+    exit
+fi
+
+curl -d "$1" "$NOTIFICATION_ID"

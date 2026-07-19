@@ -1,0 +1,76 @@
+#!/usr/bin/python3
+
+import datetime, time
+import sys
+import re
+import argparse
+
+tz_dict = {
+    'JST':9,
+    'EET':2,
+    'CET':1,
+    'WET':0,
+    'GMT':0,
+    'UTC':0,
+    'AST':-4,
+    'EST':-5,
+    'CST':-6,
+    'MST':-7,
+    'PST':-8,
+}
+
+default_zones = ['JST', 'CET']
+
+def get_timestamp_with_tz(dt_str):
+   m = re.match('([0-9]+)-([0-9]+)-([0-9]+) ([0-9]+):([0-9]+) (\w+)', dt_str)
+   if m:
+      year = int(m.group(1))
+      if year < 100:
+         year += 2000
+      month = int(m.group(2))
+      day = int(m.group(3))
+      hour = int(m.group(4))
+      minute = int(m.group(5))
+      zone = m.group(6)
+   
+   #print(f'{year}-{month}-{day} {hour}:{minute} {zone}')
+
+   tz_hours = tz_dict[zone]
+   
+   tz = datetime.timezone(datetime.timedelta(hours=tz_hours))
+   dt = datetime.datetime(year, month, day, hour, minute, 0, 0, tzinfo=tz)
+   ts = dt.timestamp()
+
+   return(ts)
+
+def print_datetime_with_tzs(ts, zones):
+   for z in zones:
+      tz_hours = tz_dict[z]
+      tz = datetime.timezone(datetime.timedelta(hours=tz_hours))
+      dt = datetime.datetime.fromtimestamp(ts, tz)
+      s = re.sub('[+-][0-9:]+$', '', str(dt))
+
+      y = dt.year
+      mo = dt.month
+      d = dt.day
+      h = dt.hour
+      mi = dt.minute
+      print(f'{z}: {y}-{mo:02}-{d:02} {h:02}:{mi:02}')
+
+def main():
+   parser = argparse.ArgumentParser(description='World clock')
+   parser.add_argument('req', nargs='*')
+   args = parser.parse_args()
+
+   if len(args.req) == 0:
+      ts = time.time()
+      print_datetime_with_tzs(ts, default_zones)
+   elif len(args.req) == 1:
+      ts = get_timestamp_with_tz(args.req[0])
+      print_datetime_with_tzs(ts, default_zones)
+   else:
+      ts = get_timestamp_with_tz(args.req[0])
+      print_datetime_with_tzs(ts, args.req[1:])
+   
+if __name__ == "__main__":
+   main()

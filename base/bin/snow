@@ -1,0 +1,29 @@
+#!/usr/bin/python3
+import shutil
+import random
+import time
+import os
+
+def render_snow(pos):
+    if pos in a:
+        print(f'\x1b[{a[pos]};{pos}H \x1b[0;0H', flush=True)
+    a[pos] = 0
+    for x in a.keys():
+        o[x] = a[x]
+        a[x] = a[x] + 1
+        if a[x] > terminal_size.lines:
+            a[x] = a[x] - 1
+            continue
+
+        print(f'\x1b[{o[x]};{x}H ', flush=True)
+        print(f'\x1b[{a[x]};{x}H*\x1b[0;0H', flush=True)
+
+a = {}
+o = {}
+terminal_size = shutil.get_terminal_size()
+os.system('clear')
+
+while True:
+    render_snow(random.randint(1, 10000) % terminal_size.columns)
+    time.sleep(0.2)
+

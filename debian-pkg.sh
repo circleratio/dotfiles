@@ -4,6 +4,7 @@ SETUP_USER=tf
 apt update
 
 apt install \
+  stow \
   lsb-release \
   screen \
   vim emacs \
