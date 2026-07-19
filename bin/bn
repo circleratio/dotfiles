@@ -1,3 +1,0 @@
-#!/usr/bin/bash
-
-python3 $HOME/work/bnote/bn.py md
