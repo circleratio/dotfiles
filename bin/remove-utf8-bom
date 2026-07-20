@@ -1,0 +1,4 @@
+#!/bin/bash
+# remove a UTF-8 BOM from a text file
+
+LC_ALL=C sed -e $'1s/^\xef\xbb\xbf//' -- "$@"

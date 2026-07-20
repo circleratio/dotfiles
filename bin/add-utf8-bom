@@ -1,0 +1,4 @@
+#!/bin/bash
+# add a UTF-8 BOM to a file
+
+LC_ALL=C sed -e $'1s/^/\xef\xbb\xbf/' -- "$@"

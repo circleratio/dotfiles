@@ -1,0 +1,4 @@
+#!/bin/bash
+# check if a file has a UTF-8 BOM
+
+[[ $(LC_ALL=C head -c 3 -- "$@") == $'\xef\xbb\xbf' ]]
