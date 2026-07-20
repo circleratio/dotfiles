@@ -1,8 +1,10 @@
 #!/bin/sh
 
-for i in $* ; do
+for i in "${@}" ; do
     if [ -d "$i" ]; then
-        ls "$i"/* | zip -@ "$i".zip
+        ZIP=`echo $i | sed -e 's/\/$//'`.zip
+        echo Making "$ZIP"
+        ls "$i"/* | zip -@ "$ZIP"
     else
         echo "$i" is not a directory. Skipped.
     fi
