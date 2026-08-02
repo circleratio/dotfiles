@@ -50,21 +50,21 @@ function mcd() {
 function c() {
     BOOKMARK="~/.dir_bookmark"
     BOOKMARK=`eval echo "$BOOKMARK"`
-    HOME_STR=`echo $HOME | sed -e 's/\//\\\\\//g' `
+    HOME_STR=`echo ${HOME} | sed -e 's/\//\\\\\//g' `
     if [[ -z $1 ]] ; then
         if  [[ -z $(which fzf) ]] ; then
-	    cat ${BOOKMARK}
-	else
+	        cat ${BOOKMARK} ${BOOKMARK}.${HOSTNAME}
+	    else
             local selected
-            selected=$(fzf < "${BOOKMARK}")
+            selected=$(cat "${BOOKMARK}" "${BOOKMARK}.${HOSTNAME}" | fzf)
             selected=$(echo ${selected} | sed -e "s/^.*://" -e "s/~/${HOME_STR}/")
             cd ${selected}
-	fi
+	    fi
     else
-        RES=$(grep ^"$1" ~/.dir_bookmark | sed -e "s/^.*://" -e "s/~/${HOME_STR}/")
+        RES=$(cat "${BOOKMARK}" "${BOOKMARK}.${HOSTNAME}" | grep ^"$1" | sed -e "s/^.*://" -e "s/~/${HOME_STR}/")
 
         if [[ -z ${RES} ]] ; then
-            cat "${BOOKMARK}"
+            cat "${BOOKMARK}" "${BOOKMARK}.${HOSTNAME}"
         else
            cd "${RES}"
         fi
