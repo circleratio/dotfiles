@@ -72,6 +72,7 @@ alias s='[[ -v STY ]] || screen -R'
 alias sl='ls -F --color=auto --show-control-chars'
 alias sn='screen -S'
 alias sr='[[ -v STY ]] || screen -r'
+alias sw='screen -t'
 # t
 alias t=train.py
 # u
