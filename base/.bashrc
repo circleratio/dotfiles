@@ -50,18 +50,24 @@ function mcd() {
 function c() {
     BOOKMARK="~/.dir_bookmark"
     BOOKMARK=`eval echo "$BOOKMARK"`
+    BOOKMARK_LOCAL=${BOOKMARK}.$(hostname)
+
+    if [ ! -e ${BOOKMARK_LOCAL} ]; then
+        BOOKMARK_LOCAL=""
+    fi
     HOME_STR=`echo ${HOME} | sed -e 's/\//\\\\\//g' `
+
     if [[ -z $1 ]] ; then
         if  [[ -z $(which fzf) ]] ; then
-	        cat ${BOOKMARK} ${BOOKMARK}.${HOSTNAME}
+	        cat ${BOOKMARK} ${BOOKMARK_LOCAL}
 	    else
             local selected
-            selected=$(cat "${BOOKMARK}" "${BOOKMARK}.${HOSTNAME}" | fzf)
+            selected=$(cat "${BOOKMARK}" ${BOOKMARK_LOCAL} | fzf)
             selected=$(echo ${selected} | sed -e "s/^.*://" -e "s/~/${HOME_STR}/")
             cd ${selected}
 	    fi
     else
-        RES=$(cat "${BOOKMARK}" "${BOOKMARK}.${HOSTNAME}" | grep ^"$1" | sed -e "s/^.*://" -e "s/~/${HOME_STR}/")
+        RES=$(grep ^"$1" ${BOOKMARK} ${BOOKMARK_LOCAL} | tail -1 | sed -e "s/^.*://" -e "s/~/${HOME_STR}/")
 
         if [[ -z ${RES} ]] ; then
             cat "${BOOKMARK}" "${BOOKMARK}.${HOSTNAME}"
@@ -117,5 +123,13 @@ export PATH=$(printf %s "$PATH" | awk -v RS=: -v ORS=: '!arr[$0]++' | sed -e "s/
 
 # zoxide
 eval "$(zoxide init bash)"
+
+# cargo
+test -f ${HOME}/.cargo/env && . "${HOME}/.cargo/env"
+
+# nvm
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 cd ~
