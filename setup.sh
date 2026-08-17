@@ -1,6 +1,10 @@
 # setup.sh
 
 # base package
+if [ -f ${HOME}/.bashrc ]; then
+    mv ${HOME}/.bashrc ${HOME}/.bashrc.bak
+fi
+
 stow -v -t ~ base
 
 mkdir -p ~/bin
