@@ -1,20 +1,29 @@
 #!/usr/bin/python3
 # -*- coding:utf-8 -*-
 
+import os
 import sys
 import requests
 import json
 
 
 def get_isbn_info_by_google(isbn):
-    base_url = "https://www.googleapis.com/books/v1/volumes?q=isbn"
+    base_url = "https://www.googleapis.com/books/v1/volumes"
     books = []
 
-    url = f"{base_url}:{isbn}"
-    r = requests.get(url)
+    api_key = os.environ.get("GOOGLE_BOOKS_API_KEY")
+    params = {"q": f"isbn:{isbn}"}
+    if api_key:
+        params["key"] = api_key
+
+    r = requests.get(base_url, params=params)
     values = json.loads(r.text)
 
-    for i in values["items"]:
+    if "error" in values:
+        print(f"Error: Google Books API error: {values['error']['message']}", file=sys.stderr)
+        exit(1)
+
+    for i in values.get("items", []):
         v = i["volumeInfo"]
 
         title = v["title"]
@@ -58,6 +67,10 @@ def main():
         exit(1)
 
     books = get_isbn_info(isbn)
+    if not books:
+        print(f"Error: no book found for ISBN {isbn}", file=sys.stderr)
+        exit(1)
+
     for b in books:
         print(md_format(b, True))
 
