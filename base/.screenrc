@@ -1,4 +1,4 @@
-defencodig utf-8
+defencoding utf-8
 escape ^Zz
 
 term xterm-256color

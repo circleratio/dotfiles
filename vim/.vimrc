@@ -1,21 +1,28 @@
 set nocompatible
 
-let s:dein_base = '$HOME/.cache/dein'
-let s:dein_src = '$HOME/.cache/dein/repos/github.com/Shougo/dein.vim'
-let s:dein_dir = expand($HOME . '/.vim/dein')
-
-execute 'set runtimepath+=' . s:dein_src
-
-call dein#begin(s:dein_base)
-call dein#add(s:dein_src)
-call dein#end()
-
-let s:toml = s:dein_dir . '/dein.toml'
-call dein#load_toml(s:toml, {'lazy': 0})
-
-if dein#check_install()
-  call dein#install()
+let s:plug_vim = expand($HOME . '/.vim/autoload/plug.vim')
+if !filereadable(s:plug_vim)
+  silent execute '!curl -fLo ' . s:plug_vim . ' --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
+
+call plug#begin('~/.vim/plugged')
+
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+Plug 'jamessan/vim-gnupg'
+
+call plug#end()
+
+command! -bang -nargs=* Rg
+    \ call fzf#vim#grep(
+    \ 'rg --column --line-number --hidden --ignore-case --no-heading --color=always '.shellescape(<q-args>), 1,
+    \ <bang>0 ? fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'up:60%')
+    \ : fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'right:50%:hidden', '?'),
+    \ <bang>0)
+nnoremap <C-p> :Files<CR>
+nnoremap <C-h> :History<CR>
 
 if has('filetype')
   filetype indent plugin on
