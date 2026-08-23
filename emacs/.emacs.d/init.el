@@ -11,6 +11,17 @@
   (customize-set-variable
    'package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
                        ("melpa" . "https://melpa.org/packages/")))
+  ;; Workaround for a Windows-only bug where package.el passes a
+  ;; drive-letter path (e.g. "c:/...") as gpg's --homedir, and the
+  ;; MSYS2-built gpg misreads it as relative, concatenating it onto
+  ;; its own bin directory. Converting to Unix-style ("/c/...") avoids
+  ;; the misparse. See https://dev.gnupg.org/T7112
+  (when (eq system-type 'windows-nt)
+    (let ((dir (expand-file-name "elpa/gnupg" user-emacs-directory)))
+      (when (string-match "\\`\\([a-zA-Z]\\):" dir)
+        (setq package-gnupghome-dir
+              (concat "/" (downcase (match-string 1 dir))
+                      (substring dir (match-end 0)))))))
   (package-initialize)
   (unless (package-installed-p 'use-package)
     (package-refresh-contents)
