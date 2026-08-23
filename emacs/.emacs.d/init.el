@@ -46,26 +46,30 @@
   :custom (custom-file (locate-user-emacs-file "custom.el")))
 
 (use-package cus-start
-  :custom
-  (;; overrides default settings
-   (ring-bell-function 'ignore)
-   (menu-bar-mode nil)
-   (tool-bar-mode nil)
-   (scroll-bar-mode nil)
-   (indent-tabs-mode nil)
-   (create-lockfiles nil)
-   (tab-width 4)
-   (history-length 1000)
-   (history-delete-duplicates t)
-   (bidi-display-reordering nil)
-   (ring-bell-function 'ignore)
-   (compilation-scroll-output t)
-   (make-backup-files nil)
-   (auto-save-default nil)
-   (history-delete-duplicates t)
-   (next-line-add-newlines nil)
-   (mouse-drag-and-drop-region t))
+  ;; Use `customize-set-variable' inside :config instead of :custom here.
+  ;; use-package's :custom keyword runs before it requires the package
+  ;; (the `require' is only emitted right before :config), so applying
+  ;; these overrides via :custom would set built-in C variables such as
+  ;; menu-bar-mode/tool-bar-mode/scroll-bar-mode before cus-start.el has
+  ;; finished declaring their full customization info, which can raise
+  ;; errors such as "Wrong type argument: listp, t".
   :config
+  ;; overrides default settings
+  (customize-set-variable 'ring-bell-function 'ignore)
+  (customize-set-variable 'menu-bar-mode nil)
+  (customize-set-variable 'tool-bar-mode nil)
+  (customize-set-variable 'scroll-bar-mode nil)
+  (customize-set-variable 'indent-tabs-mode nil)
+  (customize-set-variable 'create-lockfiles nil)
+  (customize-set-variable 'tab-width 4)
+  (customize-set-variable 'history-length 1000)
+  (customize-set-variable 'history-delete-duplicates t)
+  (customize-set-variable 'bidi-display-reordering nil)
+  (customize-set-variable 'compilation-scroll-output t)
+  (customize-set-variable 'make-backup-files nil)
+  (customize-set-variable 'auto-save-default nil)
+  (customize-set-variable 'next-line-add-newlines nil)
+  (customize-set-variable 'mouse-drag-and-drop-region t)
   (defalias 'yes-or-no-p 'y-or-n-p))
 
 (use-package startup
@@ -149,11 +153,15 @@
    (migemo-regex-dictionary nil)
    (migemo-coding-system 'utf-8-unix))
   :config
-  (setq migemo-dictionary
-        (cond ((eq system-type 'windows-nt)
-               (concat (file-name-directory (executable-find "cmigemo")) "dict/utf-8/migemo-dict"))
-              ((eq system-type 'gnu/linux)  "/usr/share/cmigemo/utf-8/migemo-dict")))
-  (migemo-init))
+  ;; Disable migemo instead of erroring when cmigemo is not installed.
+  (if-let ((cmigemo (executable-find migemo-command)))
+      (progn
+        (setq migemo-dictionary
+              (cond ((eq system-type 'windows-nt)
+                     (concat (file-name-directory cmigemo) "dict/utf-8/migemo-dict"))
+                    ((eq system-type 'gnu/linux) "/usr/share/cmigemo/utf-8/migemo-dict")))
+        (migemo-init))
+    (message "migemo: cmigemo not found; migemo search is disabled")))
 
 ;;
 ;; behaviors
