@@ -41,6 +41,7 @@ add_path "${HOME}/.local/bin"
 add_path "${HOME}/bin"
 add_path /ucrt64/bin
 add_path /mingw64/bin
+add_path "${HOME}/opt/go/bin"
 
 function mcd() {
     mkdir "$1"
