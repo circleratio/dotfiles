@@ -1,6 +1,14 @@
 #!/usr/bin/bash
 # -*- coding: utf-8 -*-
 
+if [ -f /usr/bin/python3 ]; then
+    PYTHON=/usr/bin/python3
+fi
+
+if [ -f /usr/bin/python ]; then
+    PYTHON=/usr/bin/python
+fi
+
 for i in $@; do
-    python getp.py $i
+    ${PYTHON} getp.py $i
 done
