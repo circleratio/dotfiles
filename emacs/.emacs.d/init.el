@@ -46,30 +46,34 @@
   :custom (custom-file (locate-user-emacs-file "custom.el")))
 
 (use-package cus-start
-  ;; Use `customize-set-variable' inside :config instead of :custom here.
-  ;; use-package's :custom keyword runs before it requires the package
-  ;; (the `require' is only emitted right before :config), so applying
-  ;; these overrides via :custom would set built-in C variables such as
-  ;; menu-bar-mode/tool-bar-mode/scroll-bar-mode before cus-start.el has
-  ;; finished declaring their full customization info, which can raise
-  ;; errors such as "Wrong type argument: listp, t".
+  ;; Avoid `customize-set-variable'/`(require 'cus-start)' here. In stock
+  ;; Emacs 30.1, cus-start.el unconditionally does
+  ;; (add-to-list 'custom-delayed-init-variables 'transient-mark-mode 'append)
+  ;; while `after-init-time' is still nil, but by the time a normal init
+  ;; file is loaded interactively, `command-line' has already reset
+  ;; `custom-delayed-init-variables' to the sentinel value `t' -- so that
+  ;; add-to-list call signals "Wrong type argument: listp, t" (this doesn't
+  ;; reproduce in --batch, where `after-init-time'/`noninteractive' state
+  ;; differs). Plain setq-default/mode-function calls sidestep the
+  ;; customize machinery -- and hence `cus-start.el' -- entirely.
+  :no-require t
   :config
   ;; overrides default settings
-  (customize-set-variable 'ring-bell-function 'ignore)
-  (customize-set-variable 'menu-bar-mode nil)
-  (customize-set-variable 'tool-bar-mode nil)
-  (customize-set-variable 'scroll-bar-mode nil)
-  (customize-set-variable 'indent-tabs-mode nil)
-  (customize-set-variable 'create-lockfiles nil)
-  (customize-set-variable 'tab-width 4)
-  (customize-set-variable 'history-length 1000)
-  (customize-set-variable 'history-delete-duplicates t)
-  (customize-set-variable 'bidi-display-reordering nil)
-  (customize-set-variable 'compilation-scroll-output t)
-  (customize-set-variable 'make-backup-files nil)
-  (customize-set-variable 'auto-save-default nil)
-  (customize-set-variable 'next-line-add-newlines nil)
-  (customize-set-variable 'mouse-drag-and-drop-region t)
+  (setq-default ring-bell-function 'ignore)
+  (menu-bar-mode -1)
+  (tool-bar-mode -1)
+  (scroll-bar-mode -1)
+  (setq-default indent-tabs-mode nil)
+  (setq-default create-lockfiles nil)
+  (setq-default tab-width 4)
+  (setq-default history-length 1000)
+  (setq-default history-delete-duplicates t)
+  (setq-default bidi-display-reordering nil)
+  (setq-default compilation-scroll-output t)
+  (setq-default make-backup-files nil)
+  (setq-default auto-save-default nil)
+  (setq-default next-line-add-newlines nil)
+  (setq-default mouse-drag-and-drop-region t)
   (defalias 'yes-or-no-p 'y-or-n-p))
 
 (use-package startup
