@@ -1,8 +1,8 @@
 # setup.sh
 
 # base package
-if [ -f ${HOME}/.bashrc ]; then
-    mv ${HOME}/.bashrc ${HOME}/.bashrc.bak
+if [ -f "${HOME}/.bashrc" ] && [ ! -L "${HOME}/.bashrc" ] && [ ! -e "${HOME}/.bashrc.bak" ]; then
+    mv "${HOME}/.bashrc" "${HOME}/.bashrc.bak"
 fi
 
 stow -v -t ~ base
