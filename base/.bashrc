@@ -96,6 +96,10 @@ function fkill() {
   fi
 }
 
+function ms() {
+  (cd ~/doc ; mdtool search $1 )
+}
+
 # prompt                                                                                                                        
 case "$TERM" in
     xterm|xterm-color|*-256color|screen) color_prompt=yes;;
