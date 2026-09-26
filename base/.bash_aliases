@@ -6,6 +6,7 @@ alias aug='sudo apt upgrade'
 alias b='newbooks.py -t'
 # c is used for a shell function
 alias c-='cd -'
+alias claude='CLAUDE_CODE_DISABLE_MOUSE=1 claude'
 # d
 # e
 alias e=emacs
